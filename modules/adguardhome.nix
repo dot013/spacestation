@@ -1,41 +1,40 @@
-{ config
-, lib
-, ...
-}:
-let
-  cfg = config.services.adguardhome;
-in
 {
-  imports = [ ];
+  config,
+  lib,
+  ...
+}: let
+  cfg = config.services.adguardhome;
+in {
+  imports = [];
   options.services.adguardhome = with lib;
-    with lib.types; {
-      dns.filters = mkOption {
-        type = attrsOf (submodule ({ lib, ... }: {
-          options = {
-            name = mkOption {
-              type = nullOr str;
-              default = null;
-            };
-            url = mkOption {
-              type = str;
-            };
-            enabled = mkOption {
-              type = bool;
-              default = true;
-            };
+  with lib.types; {
+    dns.filters = mkOption {
+      type = attrsOf (submodule ({lib, ...}: {
+        options = {
+          name = mkOption {
+            type = nullOr str;
+            default = null;
           };
-        }));
-        default = { };
-      };
-      dns.rewrites = mkOption {
-        type = attrsOf str;
-        default = { };
-      };
+          url = mkOption {
+            type = str;
+          };
+          enabled = mkOption {
+            type = bool;
+            default = true;
+          };
+        };
+      }));
+      default = {};
     };
+    dns.rewrites = mkOption {
+      type = attrsOf str;
+      default = {};
+    };
+  };
   config = with lib;
     mkIf cfg.enable {
-      networking.firewall.allowedTCPPorts = [ 53 ];
-      networking.firewall.allowedUDPPorts = [ 53 51820 ];
+      networking.firewall.allowedTCPPorts = [53];
+      networking.firewall.allowedUDPPorts = [53 51820];
 
       services.adguardhome = {
         settings = {

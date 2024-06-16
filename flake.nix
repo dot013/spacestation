@@ -21,21 +21,21 @@
 
     dot013-environment.url = "github:dot013/environment";
   };
-  outputs =
-    { nixpkgs
-    , home-manager
-    , ...
-    } @ inputs: {
-      nixosConfigurations = {
-        spacestation = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            inputs.home-manager.nixosModules.default
-            ./configuration.nix
-          ];
+  outputs = {
+    nixpkgs,
+    home-manager,
+    ...
+  } @ inputs: {
+    nixosConfigurations = {
+      spacestation = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
         };
+        modules = [
+          inputs.home-manager.nixosModules.default
+          ./configuration.nix
+        ];
       };
     };
+  };
 }

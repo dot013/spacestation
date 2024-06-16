@@ -1,13 +1,12 @@
-{ config
-, lib
-, pkgs
-, ...
-}:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   secrets = config.spacestation-secrets.lesser;
   deviceIp = config.services.tailscale.deviceIp;
-in
-{
+in {
   imports = [
     ../modules/adguardhome.nix
   ];

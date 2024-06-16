@@ -1,4 +1,4 @@
-{ ... }: {
+{...}: {
   imports = [
     ./prata-music.nix
   ];

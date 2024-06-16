@@ -1,9 +1,9 @@
-{ config
-, lib
-, pkgs
-, ...
-}:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.programs.nh;
   wrapper = pkgs.writeShellScriptBin "nh" ''
     function alejandra() { ${pkgs.alejandra}/bin/alejandra "$@"; }
@@ -16,9 +16,8 @@ let
 
     ${builtins.readFile ./wrapper.sh}
   '';
-in
-{
-  options.programs.nh = with lib; with lib.types; { };
+in {
+  options.programs.nh = with lib; with lib.types; {};
   config = with lib;
     mkIf cfg.enable {
       programs.nh.package = wrapper;

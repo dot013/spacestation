@@ -1,12 +1,11 @@
-{ config
-, lib
-, pkgs
-, ...
-}:
-let
-  secrets = config.spacestation-secrets.lesser;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  secrets = config.spacestation-secrets.lesser;
+in {
   imports = [
     ../modules/forgejo
   ];

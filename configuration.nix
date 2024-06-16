@@ -1,8 +1,9 @@
-{ config
-, lib
-, inputs
-, pkgs
-, ...
+{
+  config,
+  lib,
+  inputs,
+  pkgs,
+  ...
 }: {
   imports = [
     ./hardware-configuration.nix
@@ -17,13 +18,13 @@
 
   profiles.locale.enable = true;
 
-  home-manager.extraSpecialArgs = { inherit inputs; };
+  home-manager.extraSpecialArgs = {inherit inputs;};
   users.users."guz" = {
     shell = pkgs.zsh;
     hashedPasswordFile = builtins.toString config.sops.secrets."guz/password".path;
     home = "/home/guz";
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "plugdev" ];
+    extraGroups = ["wheel" "networkmanager" "plugdev"];
   };
   home-manager.users."guz" = import ./homes/guz.nix;
 
@@ -43,7 +44,7 @@
     libinput
   ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
   nix.package = pkgs.nixVersions.nix_2_21;
 
   networking = {

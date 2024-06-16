@@ -1,9 +1,10 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }: {
-  imports = [ ];
+  imports = [];
   virtualisation.oci-containers.containers.prata-music = {
     image = "codetheweb/muse:latest";
     autoStart = true;
