@@ -18,6 +18,7 @@
 
   profiles.locale.enable = true;
 
+  home-manager.backupFileExtension = "backup~";
   home-manager.extraSpecialArgs = {inherit inputs;};
   users.users."guz" = {
     shell = pkgs.zsh;
