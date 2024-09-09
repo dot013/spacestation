@@ -1,5 +1,6 @@
 {...}: {
   imports = [
+    ./cloudflare-funnel.nix
   ];
   virtualisation = {
     docker.enable = true;

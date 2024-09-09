@@ -28,8 +28,16 @@ in {
     settings = {
       server = {
         HTTP_PORT = secrets.services.forgejo.port;
-        DOMAIN = secrets.services.forgejo.domain;
-        ROOT_URL = "https://${secrets.services.forgejo.domain}";
+        DOMAIN = "forgejo.capytal.company";
+        ROOT_URL = "https://forgejo.capytal.company";
+      };
+      admin = {
+        DISABLE_REGULAR_ORG_CREATION = true;
+        USER_DISABLED_FEATURES = "deletion manage_ssh_keys manage_gpg_keys";
+        EXTERNAL_USER_DISABLED_FEATURES = "deletion manage_ssh_keys manage_gpg_keys";
+      };
+      service = {
+        DISABLE_REGISTRATION = true;
       };
     };
   };
