@@ -25,7 +25,7 @@
     hashedPasswordFile = builtins.toString config.sops.secrets."guz/password".path;
     home = "/home/guz";
     isNormalUser = true;
-    extraGroups = ["wheel" "networkmanager" "plugdev"];
+    extraGroups = ["wheel" "networkmanager" "plugdev" "docker"];
   };
   home-manager.users."guz" = import ./homes/guz.nix;
 
