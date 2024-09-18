@@ -54,6 +54,7 @@ in {
       "@@||tumblr.com^$important"
       "@@||wordpress.com^$important"
       "@@||tailscale.com^$important"
+      "@@||torproject.org^$important"
     ];
   };
 }
