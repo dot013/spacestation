@@ -70,14 +70,17 @@ in {
       logo.png = ./assets/icon.png;
       logo.svg = ./assets/icon.svg;
     };
-    # users = {
-    #   user1 = {
-    #     name = /. + config.sops.secrets."forgejo/user1/name".path;
-    #     password = /. + config.sops.secrets."forgejo/user1/password".path;
-    #     email = /. + config.sops.secrets."forgejo/user1/email".path;
-    #     admin = true;
-    #   };
-    # };
+    users = {
+      enable = true;
+      users = {
+        user1 = {
+          name = /. + config.sops.secrets."forgejo/user1/name".path;
+          password = /. + config.sops.secrets."forgejo/user1/password".path;
+          email = /. + config.sops.secrets."forgejo/user1/email".path;
+          admin = true;
+        };
+      };
+    };
     settings = {
       DEFAULT = {
         APP_NAME = "Capytal Code";
