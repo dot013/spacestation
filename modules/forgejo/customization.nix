@@ -23,6 +23,40 @@ in {
       type = attrsOf anything;
       default = {};
     };
+    options = {
+      label = mkOption {
+        type = attrsOf (attrsOf (submodule ({
+          config,
+          lib,
+          ...
+        }:
+          with lib;
+          with lib.types; {
+            options = {
+              name = mkOption {
+                type = nullOr str;
+                default = null;
+              };
+              exclusive = mkOption {
+                type = bool;
+                default = false;
+              };
+              color = mkOption {
+                type = str;
+              };
+              description = mkOption {
+                type = str;
+                default = "";
+              };
+              priority = mkOption {
+                type = nullOr (enum ["low" "medium" "high" "critical"]);
+                default = null;
+              };
+            };
+          })));
+        default = {};
+      };
+    };
     templates = {
       header = mkOption {
         type = nullOr fileType;
@@ -81,16 +115,9 @@ in {
                 else {source = theme;};
               assetsDir = "${forgejoConfig.customDir}/public/assets";
               templatesDir = "${forgejoConfig.customDir}/templates";
+              optionsDir = "${forgejoConfig.customDir}/options";
             in
               {
-                "${templatesDir}/custom/header.tmpl" =
-                  mkIf (!(isNull customization.templates.header))
-                  (fileTypeToHomeFile customization.templates.header);
-
-                "${templatesDir}/home.tmpl" =
-                  mkIf (!(isNull customization.templates.home))
-                  (fileTypeToHomeFile customization.templates.home);
-
                 "${assetsDir}/img/logo.svg" =
                   mkIf (!(isNull customization.logo.svg))
                   (fileTypeToHomeFile customization.logo.svg);
@@ -106,7 +133,34 @@ in {
                 "${assetsDir}/img/favicon.png" =
                   mkIf (!(isNull customization.favicon.png))
                   (fileTypeToHomeFile customization.favicon.png);
+
+                "${templatesDir}/custom/header.tmpl" =
+                  mkIf (!(isNull customization.templates.header))
+                  (fileTypeToHomeFile customization.templates.header);
+
+                "${templatesDir}/home.tmpl" =
+                  mkIf (!(isNull customization.templates.home))
+                  (fileTypeToHomeFile customization.templates.home);
               }
+              // (lib.attrsets.mapAttrs'
+                (ln: lv:
+                  lib.attrsets.nameValuePair "${optionsDir}/label/${ln}.yaml" {
+                    text = toJSON {
+                      labels = attrValues (mapAttrs
+                        (n: v: {
+                          name =
+                            if isNull v.name
+                            then n
+                            else v.name;
+                          exclusive = v.exclusive;
+                          color = v.color;
+                          description = v.description;
+                          priority = v.priority;
+                        })
+                        lv);
+                    };
+                  })
+                customization.options.label)
               // (lib.attrsets.mapAttrs'
                 (n: v: lib.attrsets.nameValuePair "${assetsDir}/${n}" v)
                 customization.assets)

@@ -20,12 +20,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    dot013-environment.url = "github:dot013/environment";
-    dot013-environment.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    dot013-environment = {
+      url = "github:dot013/environment";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    base16 = {
+      url = "github:SenchoPens/base16.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     frappurccino-forgejo = {
-      url = "git+file:///home/guz/.projects/capytal/frappurccino-forgejo";
-      # url = "git+https://forgejo.capytal.company/capytal/frappurccino-forgejo";
+      # url = "git+file:///home/guz/.projects/capytal/frappurccino-forgejo";
+      url = "git+https://forgejo.capytal.company/capytal/frappurccino-forgejo";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
