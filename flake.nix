@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
@@ -20,16 +21,38 @@
     };
 
     dot013-environment.url = "github:dot013/environment";
+    dot013-environment.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
   outputs = {
     nixpkgs,
     home-manager,
+    nixpkgs-unstable,
     ...
   } @ inputs: {
-    nixosConfigurations = {
+    nixosConfigurations = let
+      systemSettings = {
+        system = "x86_64-linux";
+      };
+      pkgs = import nixpkgs {
+        system = systemSettings.system;
+        config = {
+          allowUnfree = true;
+          allowUnfreePredicate = _: true;
+        };
+      };
+      pkgs-unstable = import nixpkgs-unstable {
+        system = systemSettings.system;
+        config = {
+          allowUnfree = true;
+          allowUnfreePredicate = _: true;
+        };
+      };
+    in {
       spacestation = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs;
+          inherit pkgs;
+          inherit pkgs-unstable;
         };
         modules = [
           inputs.home-manager.nixosModules.default
