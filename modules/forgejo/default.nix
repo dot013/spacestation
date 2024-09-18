@@ -2,57 +2,94 @@
   config,
   lib,
   pkgs,
-  utils,
   ...
 }: let
   cfg = config.services.forgejo;
-  yamlFormat = pkgs.formats.yaml {};
-  users = builtins.attrValues (builtins.mapAttrs
-    (username: info: {
-      name =
-        if isNull info.name
-        then username
-        else info.name;
-      email = info.email;
-      password = info.password;
-      admin = info.admin;
-    })
-    cfg.users);
-  initList = l: lib.strings.concatStringsSep "," l;
+
+  initList = l: (lib.strings.concatStringsSep "," l);
+
+  customThemes = with builtins;
+  with lib.attrsets;
+    if !(isNull cfg.customization.theme)
+    then
+      (
+        if (isAttrs cfg.customization.theme)
+        then (mapAttrsToList (n: v: n) cfg.customization.theme)
+        else ["custom"]
+      )
+    else [];
 in {
-  imports = [];
+  imports = [
+    ./users.nix
+    ./customization.nix
+  ];
   options.services.forgejo = with lib;
   with lib.types; {
-    handleUndeclaredUsers = mkOption {
-      type = bool;
-      default = false;
-    };
-    users = mkOption {
-      type = attrsOf (submodule ({
-        config,
-        lib,
-        ...
-      }:
-        with lib;
-        with lib.types; {
-          options = {
-            name = mkOption {
-              type = nullOr (either str path);
-              default = null;
-            };
-            password = mkOption {
-              type = either str path;
-            };
-            email = mkOption {
-              type = either str path;
-            };
-            admin = mkOption {
-              type = bool;
-              default = false;
-            };
-          };
-        }));
-      default = {};
+    settings = {
+      DEFAULT = {
+        APP_NAME = mkOption {
+          type = str;
+          default = "Forgejo: Beyond code. We forge.";
+        };
+      };
+      actions = {
+        ENABLED = mkOption {
+          type = bool;
+          default = cfg.actions.enable;
+        };
+        DEFAULT_ACTIONS_URL = mkOption {
+          type = str;
+          default = "https://localhost:${toString cfg.settings.server.HTTP_PORT}";
+        };
+      };
+      repository = {
+        DEFAULT_REPO_UNITS = mkOption {
+          type = listOf str;
+          default = ["repo.code"];
+          apply = t: initList t;
+        };
+        DISABLED_REPO_UNITS = mkOption {
+          type = listOf str;
+          default = [];
+          apply = t:
+            initList (t
+              ++ (
+                if !cfg.actions.enable
+                then ["repo.actions"]
+                else []
+              ));
+        };
+      };
+      ui = {
+        DEFAULT_THEME = mkOption {
+          type = str;
+          default = with builtins;
+            if (!(isNull cfg.customization.theme))
+            then elemAt customThemes 0
+            else "forgejo-auto";
+        };
+        THEMES = mkOption {
+          type = listOf str;
+          default = [
+            "forgejo-auto"
+            "forgejo-light"
+            "forgejo-dark"
+            "gitea-auto"
+            "gitea-light"
+            "gitea-dark"
+            "forgejo-auto-deuteranopania-protanopia"
+            "forgejo-light-deuteranopania-protanopia"
+            "forgejo-dark-deuteranopania-protanopia"
+            "forgejo-auto-tritanopia"
+            "forgejo-light-tritanopia"
+            "forgejo-dark-tritanopia"
+          ];
+          apply = t: let
+            list = t ++ customThemes;
+          in
+            initList list;
+        };
+      };
     };
     actions = {
       enable = mkOption {
@@ -100,27 +137,7 @@ in {
 
       services.forgejo = {
         user = mkDefault "git";
-        group = mkDefault cfg.user;
-        settings = {
-          DEFAULT = {
-            APP_NAME = mkDefault "Forgejo: Beyond coding. We forge.";
-          };
-          actions = {
-            ENABLED = mkDefault cfg.actions.enable;
-            DEFAULT_ACTIONS_URL = mkDefault "http://localhost:${toString cfg.settings.server.HTTP_PORT}";
-          };
-          repository = {
-            DEFAULT_REPO_UNITS = mkDefault (initList [
-              "repo.code"
-            ]);
-            DISABLED_REPO_UNITS = mkIf (!cfg.actions.enable) (mkDefault (initList [
-              "repo.actions"
-            ]));
-          };
-          service = {
-            # DISABLE_REGISTRARION = mkDefault true;
-          };
-        };
+        group = cfg.user;
       };
 
       virtualisation.docker.enable = mkIf cfg.actions.enable (mkDefault true);
@@ -140,65 +157,6 @@ in {
               insecure = true;
             };
           };
-        };
-      };
-
-      systemd.services."forgejo-users-setup" = with builtins; {
-        script = ''
-          function gum() { ${pkgs.gum}/bin/gum "$@"; }
-          function forgejo() {
-            # local config_file="${toString cfg.stateDir}/custom/conf/app.ini";
-            # touch $config_file
-            ${cfg.package}/bin/gitea \
-              --work-path ${cfg.stateDir} \
-              "$@"
-          }
-          function fjuser() { forgejo admin user "$@"; }
-          function awk() { ${pkgs.gawk}/bin/awk "$@"; }
-
-          handle_undeclared_users="${
-            if cfg.handleUndeclaredUsers
-            then "true"
-            else "false"
-          }";
-
-          declared_users=(${toString (map (user: "${
-              if isPath user.name
-              then "$(cat ${toString user.name})"
-              else user.name
-            }")
-            users)});
-
-          ${readFile ./user-handler.sh}
-
-          ${toString (map (user: ''
-              set-user "${
-                if isPath user.name
-                then "$(cat ${toString user.name})"
-                else user.name
-              }" "${
-                if isPath user.email
-                then "$(cat ${toString user.email})"
-                else user.email
-              }" "${
-                if isPath user.password
-                then "$(cat ${toString user.password})"
-                else user.password
-              }" \
-                       "${
-                if user.admin
-                then "true"
-                else "false"
-              }"
-            '')
-            users)}
-        '';
-        wantedBy = ["multi-user.target"];
-        after = ["forgejo.service"];
-        serviceConfig = {
-          Type = "oneshot";
-          User = cfg.user;
-          Group = cfg.group;
         };
       };
     };

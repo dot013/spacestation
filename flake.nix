@@ -22,6 +22,12 @@
 
     dot013-environment.url = "github:dot013/environment";
     dot013-environment.inputs.nixpkgs.follows = "nixpkgs-unstable";
+
+    frappurccino-forgejo = {
+      url = "git+file:///home/guz/.projects/capytal/frappurccino-forgejo";
+      # url = "git+https://forgejo.capytal.company/capytal/frappurccino-forgejo";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = {
     nixpkgs,

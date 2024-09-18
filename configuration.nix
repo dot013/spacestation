@@ -3,14 +3,16 @@
   lib,
   inputs,
   pkgs,
+  pkgs-unstable,
   ...
 }: {
   imports = [
-    ./hardware-configuration.nix
     inputs.dot013-environment.nixosModules.default
+    ./hardware-configuration.nix
     ./services
     ./modules
     ./secrets.nix
+    ./capytal
   ];
 
   programs.nh.enable = true;
@@ -19,7 +21,11 @@
   profiles.locale.enable = true;
 
   home-manager.backupFileExtension = "backup~";
-  home-manager.extraSpecialArgs = {inherit inputs;};
+  home-manager.extraSpecialArgs = {
+    inherit inputs;
+    inherit pkgs;
+    inherit pkgs-unstable;
+  };
   users.users."guz" = {
     shell = pkgs.zsh;
     hashedPasswordFile = builtins.toString config.sops.secrets."guz/password".path;

@@ -1,0 +1,55 @@
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link href="https://fonts.bunny.net/css?family=red-hat-display:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|roboto:100" rel="stylesheet" />
+<script src="/assets/js/htmx.js"></script>
+<script src="/assets/js/header.js" defer></script>
+<style type="text/css">
+	:root * {
+		--fonts-proportional: "Red Hat Display", "Noto Sans", "Liberation Sans", sans-serif, var(--fonts-emoji) !important;
+	}
+	@font-face {
+		family: "Cal Sans";
+		src:
+			url('assets/fonts/CalSans-SemiBold.woff2') format('woff2'),
+			url('assets/fonts/CalSans-SemiBold.woff') format('woff'),
+			url('assets/fonts/CalSans-SemiBold.ttf') format('truetype');
+	};
+</style>
+<style type="text/css">
+	@keyframes enter {
+		0% {
+			opacity: 0;
+			transform: translateY(10px);
+		}
+		100% {
+			opacity: 1;
+			transform: none;
+		}
+	}
+	.slide-enter-content > * {
+		--stagger: 0;
+		--delay: 150ms;
+		--start: 0ms;
+		animation: enter 0.5s both 1;
+		animation-delay: calc(var(--start) + var(--stagger) * var(--delay));
+	}
+	.slide-enter-content > *:nth-child(1) { --stagger: 1; }
+	.slide-enter-content > *:nth-child(2) { --stagger: 2; }
+	.slide-enter-content > *:nth-child(3) { --stagger: 3; }
+	.slide-enter-content > *:nth-child(4) { --stagger: 4; }
+	.slide-enter-content > *:nth-child(5) { --stagger: 5; }
+	.slide-enter-content > *:nth-child(6) { --stagger: 6; }
+	.slide-enter-content > *:nth-child(7) { --stagger: 7; }
+	.slide-enter-content > *:nth-child(8) { --stagger: 8; }
+	.slide-enter-content > *:nth-child(9) { --stagger: 9; }
+	.slide-enter-content > *:nth-child(10) { --stagger: 10; }
+	.slide-enter-content > *:nth-child(11) { --stagger: 11; }
+	.slide-enter-content > *:nth-child(12) { --stagger: 12; }
+	.slide-enter-content > *:nth-child(13) { --stagger: 13; }
+	.slide-enter-content > *:nth-child(14) { --stagger: 14; }
+	.slide-enter-content > *:nth-child(15) { --stagger: 15; }
+	.slide-enter-content > *:nth-child(16) { --stagger: 16; }
+	.slide-enter-content > *:nth-child(17) { --stagger: 17; }
+	.slide-enter-content > *:nth-child(18) { --stagger: 18; }
+	.slide-enter-content > *:nth-child(19) { --stagger: 19; }
+	.slide-enter-content > *:nth-child(20) { --stagger: 20; }
+</style>
