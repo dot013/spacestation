@@ -45,12 +45,12 @@ in {
       project = {
         PROJECT_BOARD_BASIC_KANBAN_TYPE = mkOption {
           type = listOf str;
-          defaut = ["To Do" "In Progress" "Done"];
+          default = ["To Do" "In Progress" "Done"];
           apply = t: initList t;
         };
         PROJECT_BOARD_BUG_TRIAGE_TYPE = mkOption {
           type = listOf str;
-          defaut = ["Needs Triage" "High Priority" "Low Priority" "Closed"];
+          default = ["Needs Triage" "High Priority" "Low Priority" "Closed"];
           apply = t: initList t;
         };
       };
