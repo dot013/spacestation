@@ -47,6 +47,8 @@ in {
       owner = config.services.forgejo.user;
     };
 
+    sops.secrets."discord/muse-bot/environment" = {};
+
     sops.age.keyFile = "/home/guz/.config/sops/age/keys.txt";
   };
 }

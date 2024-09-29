@@ -8,6 +8,7 @@ in {
     inputs.base16.nixosModule
     ./forgejo
     ./garage.nix
+    ./music-bot.nix
   ];
 
   scheme = catppuccin-base16;
