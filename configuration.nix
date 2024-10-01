@@ -32,6 +32,9 @@
     home = "/home/guz";
     isNormalUser = true;
     extraGroups = ["wheel" "networkmanager" "plugdev" "docker"];
+    openssh.authorizedKeys.keyFiles = [
+      ./.ssh/guz.pub
+    ];
   };
   home-manager.users."guz" = import ./homes/guz.nix;
 
@@ -64,10 +67,10 @@
     hostName = "spacestation";
     wireless.enable = false;
     dhcpcd.enable = true;
-    defaultGateway = "192.168.1.1";
+    defaultGateway = "${config.spacestation-secrets.lesser.devices.defaultGateway}";
     interfaces."eno1".ipv4.addresses = [
       {
-        address = "192.168.1.10";
+        address = "${config.spacestation-secrets.lesser.devices.spacestation}";
         prefixLength = 24;
       }
     ];
@@ -75,6 +78,10 @@
   };
 
   services.openssh.enable = true;
+  services.openssh.settings = {
+    PasswordAuthentication = false;
+    PermitRootLogin = "forced-commands-only";
+  };
 
   security.rtkit.enable = true;
 
