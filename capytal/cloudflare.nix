@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{config, ...}: let
   secrets = config.spacestation-secrets.lesser;
 in {
   imports = [];
@@ -19,7 +14,7 @@ in {
       "--no-autoupdate"
       "run"
       "--token"
-      secrets.cloudflare-funnel
+      secrets.capytal.cloudflare-funnel
     ];
     environment = {};
   };

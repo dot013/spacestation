@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
+{config, ...}: {
   imports = [];
   virtualisation.oci-containers.containers.capytal-music = {
     image = "codetheweb/muse:latest";

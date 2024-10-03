@@ -49,6 +49,10 @@ in {
 
     sops.secrets."discord/muse-bot/environment" = {};
 
+    sops.secrets."caddy/capytal/env" = mkIf config.services.caddy.enable {
+      owner = config.services.caddy.user;
+    };
+
     sops.age.keyFile = "/home/guz/.config/sops/age/keys.txt";
   };
 }

@@ -5,6 +5,7 @@
   ...
 }: let
   secrets = config.spacestation-secrets.lesser;
+  garageCfg = secrets.capytal.services.garage;
 in {
   imports = [];
 
@@ -15,39 +16,39 @@ in {
 
     replication_factor = 1;
 
-    rpc_bind_addr = "[::]:${toString secrets.services.garage-rpc.port}";
-    rpc_public_addr = "127.0.0.1:${toString secrets.services.garage-rpc.port}";
-    rpc_secret = secrets.services.garage-rpc.token;
+    rpc_bind_addr = "[::]:${toString garageCfg.rpc.port}";
+    rpc_public_addr = "127.0.0.1:${toString garageCfg.rpc.port}";
+    rpc_secret = garageCfg.rpc.token;
 
     s3_api = {
       s3_region = "garage";
-      api_bind_addr = "[::]:${toString secrets.services.garage-api.port}";
+      api_bind_addr = "[::]:${toString garageCfg.api.port}";
       root_domain = ".s3.garage.localhost";
     };
 
     s3_web = {
-      bind_addr = "[::]:${toString secrets.services.garage-web.port}";
+      bind_addr = "[::]:${toString garageCfg.web.port}";
       root_domain = ".web.garage.localhost";
       index = "index.html";
     };
 
     k2v_api = {
-      api_bind_addr = "[::]:${toString secrets.services.garage-k2v.port}";
+      api_bind_addr = "[::]:${toString garageCfg.k2v.port}";
     };
 
     admin = {
-      api_bind_addr = "[::]:${toString secrets.services.garage-admin.port}";
-      admin_token = secrets.services.garage-admin.token;
-      metrics_token = secrets.services.garage-admin.metrics_token;
+      api_bind_addr = "[::]:${toString garageCfg.admin.port}";
+      admin_token = garageCfg.admin.token;
+      metrics_token = garageCfg.admin.metrics_token;
     };
   };
 
   networking.firewall.allowedTCPPorts = [
-    secrets.services.garage-rpc.port
-    secrets.services.garage-api.port
-    secrets.services.garage-web.port
-    secrets.services.garage-k2v.port
-    secrets.services.garage-admin.port
+    garageCfg.rpc.port
+    garageCfg.api.port
+    garageCfg.web.port
+    garageCfg.k2v.port
+    garageCfg.admin.port
   ];
 
   environment.systemPackages = with pkgs; [awscli2];

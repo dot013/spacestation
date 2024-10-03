@@ -1,23 +1,14 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{config, ...}: let
   secrets = config.spacestation-secrets.lesser;
-  deviceIp = config.services.tailscale.deviceIp;
+  adguardCfg = secrets.guz.services.adguard;
 in {
   imports = [
     ../modules/adguardhome.nix
   ];
   services.adguardhome = {
     enable = true;
-    dns.rewrites = {
-      "*.${secrets.homelab-domain}" = deviceIp;
-      "${secrets.homelab-domain}" = deviceIp;
-    };
     openFirewall = true;
-    port = secrets.services.adguard.port;
+    port = adguardCfg.port;
     dns.filters = {
       "Hagezi's Multi PRO" = {
         url = "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/pro.txt";

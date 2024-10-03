@@ -12,20 +12,6 @@ in {
       type = bool;
       default = false;
     };
-    tailnetName = mkOption {
-      type = str;
-    };
-    tailnetUrl = mkOption {
-      type = str;
-      default = "${config.services.tailscale.tailnetName}.ts.net";
-    };
-    deviceUrl = mkOption {
-      type = str;
-      default = "${config.networking.hostName}.${config.services.tailscale.tailnetUrl}";
-    };
-    deviceIp = mkOption {
-      type = str;
-    };
   };
   config = with lib;
     mkIf cfg.enable {

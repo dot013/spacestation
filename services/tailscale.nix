@@ -1,11 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
-  secrets = config.spacestation-secrets.lesser;
-in {
+{...}: {
   imports = [
     ../modules/tailscale.nix
   ];
@@ -13,7 +6,5 @@ in {
     enable = true;
     useRoutingFeatures = "both";
     exitNode = true;
-    tailnetName = secrets.tailnet-name;
-    deviceIp = secrets.device-ip;
   };
 }

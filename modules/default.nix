@@ -5,5 +5,6 @@
     ./locales.nix
     ./nh
     ./tailscale.nix
+    ./xcaddy
   ];
 }
