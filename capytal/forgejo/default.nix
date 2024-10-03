@@ -19,7 +19,7 @@ in {
     actions = {
       enable = true;
       token = forgejoCfg.actions.token;
-      url = "https://forgejo.capytal.company";
+      url = "https://forge.capytal.company";
       labels = forgejoCfg.actions.labels;
     };
     users = {
@@ -39,7 +39,7 @@ in {
       };
       server = rec {
         HTTP_PORT = forgejoCfg.port;
-        DOMAIN = "forgejo.capytal.company";
+        DOMAIN = "forge.capytal.company";
         ROOT_URL = "https://${DOMAIN}";
       };
       project = {
