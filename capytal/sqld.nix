@@ -14,7 +14,7 @@ in {
   ];
 
   systemd.services.sqld = with lib; let
-    sqld = escapeShellArg (getExe pkgs.sqld);
+    sqld = escapeShellArg (getExe' pkgs.sqld "sqld");
   in {
     after = ["network.target" "network-online.target"];
     wants = ["network.target" "network-online.target"];
