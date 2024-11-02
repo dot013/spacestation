@@ -26,27 +26,12 @@ with builtins; let
   '';
 in {
   services.forgejo.customization = {
-    assets = {
-      "fonts" = {
-        source = "${cal-sans}/fonts/webfonts";
-        recursive = true;
-      };
-      "fonts.css" = {
-        source = fonts-css;
-      };
-      "img/home-logo.png" = {
-        source = ./assets/logo.png;
-      };
-      "img/home-logo.svg" = {
-        source = ./assets/logo.svg;
-      };
-    };
-    templates = {
-      header = ''
-        <link rel="stylesheet" type="text/css" href="assets/fonts.css">
-        ${readFile ./templates/custom/header.tmpl}
-      '';
-      home = ./templates/home.tmpl;
+    assets = ./assets;
+    templates = ./templates;
+    theme = {
+      "frappurccino" = frappurccino-theme;
+      "capytal-dark-b" = ./themes/theme-capytal-dark.css;
+      "bthree-dark" = ./themes/theme-bthree-dark.css;
     };
     options.label."Default" = with config.scheme.withHashtag; {
       "scope/a11y" = {
@@ -148,12 +133,5 @@ in {
         exclusive = true;
       };
     };
-    theme = {
-      "frappurccino" = frappurccino-theme;
-    };
-    favicon.png = ./assets/icon.png;
-    favicon.svg = ./assets/icon.svg;
-    logo.png = ./assets/icon.png;
-    logo.svg = ./assets/icon.svg;
   };
 }

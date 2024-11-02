@@ -20,8 +20,8 @@ in {
       default = true;
     };
     assets = mkOption {
-      type = attrsOf anything;
-      default = {};
+      type = nullOr path;
+      default = null;
     };
     options = {
       label = mkOption {
@@ -57,30 +57,8 @@ in {
         default = {};
       };
     };
-    templates = {
-      header = mkOption {
-        type = nullOr fileType;
-        default = null;
-      };
-      home = mkOption {
-        type = nullOr fileType;
-        default = null;
-      };
-    };
-    logo.svg = mkOption {
-      type = nullOr fileType;
-      default = null;
-    };
-    logo.png = mkOption {
-      type = nullOr fileType;
-      default = null;
-    };
-    favicon.svg = mkOption {
-      type = nullOr fileType;
-      default = null;
-    };
-    favicon.png = mkOption {
-      type = nullOr fileType;
+    templates = mkOption {
+      type = nullOr path;
       default = null;
     };
     theme = mkOption {
@@ -118,29 +96,14 @@ in {
               optionsDir = "${forgejoConfig.customDir}/options";
             in
               {
-                "${assetsDir}/img/logo.svg" =
-                  mkIf (!(isNull customization.logo.svg))
-                  (fileTypeToHomeFile customization.logo.svg);
-
-                "${assetsDir}/img/logo.png" =
-                  mkIf (!(isNull customization.logo.png))
-                  (fileTypeToHomeFile customization.logo.png);
-
-                "${assetsDir}/img/favicon.svg" =
-                  mkIf (!(isNull customization.favicon.svg))
-                  (fileTypeToHomeFile customization.favicon.svg);
-
-                "${assetsDir}/img/favicon.png" =
-                  mkIf (!(isNull customization.favicon.png))
-                  (fileTypeToHomeFile customization.favicon.png);
-
-                "${templatesDir}/custom/header.tmpl" =
-                  mkIf (!(isNull customization.templates.header))
-                  (fileTypeToHomeFile customization.templates.header);
-
-                "${templatesDir}/home.tmpl" =
-                  mkIf (!(isNull customization.templates.home))
-                  (fileTypeToHomeFile customization.templates.home);
+                "${assetsDir}" = mkIf (!(isNull cfg.assets)) {
+                  source = cfg.assets;
+                  recursive = true;
+                };
+                "${templatesDir}" = mkIf (!(isNull cfg.templates)) {
+                  source = cfg.templates;
+                  recursive = true;
+                };
               }
               // (lib.attrsets.mapAttrs'
                 (ln: lv:
@@ -161,9 +124,6 @@ in {
                     };
                   })
                 customization.options.label)
-              // (lib.attrsets.mapAttrs'
-                (n: v: lib.attrsets.nameValuePair "${assetsDir}/${n}" v)
-                customization.assets)
               // (
                 if (!(isNull customization.theme))
                 then

@@ -1,0 +1,519 @@
+/* bthree dark theme */
+:root {
+  --is-dark-theme: true;
+
+  /* Colors. */
+  /* Some colors must be set as HEX, due to the monaco-editor no supporting
+   * conversion of non-hex colors. https: //github.com/microsoft/monaco-editor/issues/1815 */
+  color-scheme: dark;
+  --color-primary: hsl(204deg, 90%, 60%);
+  --color-primary-hover: hsl(204deg, 90%, 50%);
+  --color-primary-bg: hsla(204deg, 100%, 36%, .6);
+  --color-primary-text: hsl(204deg, 90%, 72%);
+
+  --color-primary-contrast: hsl(0, 0%, 100%);
+  --color-primary-dark-1: #14a1ff;
+  --color-primary-dark-2: #47b6ff;
+  --color-primary-dark-3: #66c2ff;
+  --color-primary-dark-4: #8fd2ff;
+  --color-primary-dark-5: #addeff;
+  --color-primary-dark-6: #c7e9ff;
+  --color-primary-dark-7: #e0f3ff;
+
+  --color-primary-light-1: #007acc;
+  --color-primary-light-2: #006eb8;
+  --color-primary-light-3: #005c99;
+  --color-primary-light-4: #005085;
+  --color-primary-light-5: #003d66;
+  --color-primary-light-6: #003152;
+  --color-primary-light-7: #001f33;
+
+  --color-primary-alpha-10: #008deb1a;
+  --color-primary-alpha-20: #008deb33;
+  --color-primary-alpha-30: #008deb4d;
+  --color-primary-alpha-40: #008deb66;
+  --color-primary-alpha-50: #008deb80;
+  --color-primary-alpha-60: #008deb99;
+  --color-primary-alpha-70: #008debb3;
+  --color-primary-alpha-80: #008debcc;
+  --color-primary-alpha-90: #008debe6;
+
+  --color-secondary: hsl(213, 12%, 30%);
+  --color-secondary-bg: hsl(213, 16%, 20%);
+  --color-secondary-dark-1: hsl(213, 12%, 35%);
+  --color-secondary-dark-2: hsl(213, 12%, 40%);
+  --color-secondary-dark-3: hsl(213, 12%, 50%);
+  --color-secondary-dark-4: hsl(213, 12%, 55%);
+  --color-secondary-dark-5: hsl(213, 12%, 60%);
+  --color-secondary-dark-6: #9aa3af;
+  --color-secondary-dark-7: hsl(213, 12%, 69%);
+  --color-secondary-dark-8: hsl(213, 12%, 74%);
+  --color-secondary-dark-9: hsl(213, 11%, 79%);
+  --color-secondary-dark-10: hsl(213, 11%, 84%);
+  --color-secondary-dark-11: hsl(213, 12%, 89%);
+  --color-secondary-dark-12: hsl(213, 12%, 94%);
+  --color-secondary-dark-13: hsl(213, 14%, 98%);
+
+  --color-secondary-light-1: hsl(213, 12%, 24%);
+  --color-secondary-light-2: hsl(213, 12%, 18%);
+  --color-secondary-light-3: hsl(213, 11%, 12%);
+  --color-secondary-light-4: hsl(213, 8%, 6%);
+
+  --color-secondary-alpha-10: hsla(213, 12%, 31%, 0.1);
+  --color-secondary-alpha-20: hsla(213, 12%, 31%, 0.2);
+  --color-secondary-alpha-30: hsla(213, 12%, 31%, 0.3);
+  --color-secondary-alpha-40: hsla(213, 12%, 31%, 0.4);
+  --color-secondary-alpha-50: hsla(213, 12%, 31%, 0.5);
+  --color-secondary-alpha-60: hsla(213, 12%, 31%, 0.6);
+  --color-secondary-alpha-70: hsla(213, 12%, 31%, 0.7);
+  --color-secondary-alpha-80: hsla(213, 12%, 31%, 0.8);
+  --color-secondary-alpha-90: hsla(213, 12%, 31%, 0.9);
+
+  /* Colors for buttons, labels, etc. */
+  --color-red: hsl(0, 56.4%, 54.1%);
+  --color-red-light: hsl(0, 56.5%, 48.6%);
+  --color-red-dark-1: hsl(3deg, 75%, 59%);
+  --color-orange: hsl(23.8, 89%, 42.4%);
+  --color-orange-light: hsl(23.6, 88.7%, 38%);
+  --color-yellow: hsl(44.8, 97%, 40.6%);
+  --color-yellow-light: hsl(44.8, 96.8%, 37%);
+  --color-olive: hsl(67.5, 79.1%, 36%);
+  --color-olive-light: hsl(67.4, 79.3%, 32%);
+  --color-green: hsl(124deg 41% 35%);
+  --color-green-light: hsl(124deg 41% 45%);
+  --color-teal: hsl(177, 100%, 28.4%);
+  --color-teal-light: hsl(176.8, 100%, 26%);
+  --color-blue: hsl(206, 56%, 50.2%);
+  --color-blue-light: hsl(206, 55%, 45.3%);
+  --color-blue-dark-1: hsl(213deg, 89%, 64%);
+  --color-blue-dark-bg: hsla(213deg, 89%, 64%, .15);
+  --color-violet: hsl(259.2, 66.5%, 65%);
+  --color-violet-light: hsl(259.1, 66.2%, 58%);
+  --color-violet-dark-1: hsl(262deg, 66%, 66%);
+  --color-violet-dark-bg: hsla(262deg, 66%, 66%, .15);
+  --color-purple: hsl(285, 55.9%, 58%);
+  --color-purple-light: hsl(285, 55.6%, 52%);
+  --color-pink: hsl(326, 64.6%, 50.2%);
+  --color-pink-light: hsl(326, 64.5%, 45%);
+  --color-brown: hsl(23.4, 33%, 48%);
+  --color-brown-light: hsl(23.5, 33%, 43%);
+  --color-grey: hsl(213, 12%, 30%);
+  --color-grey-light: hsl(213, 12%, 40%);
+  --color-black: hsl(213, 21%, 15%);
+  --color-black-light: hsl(223, 20%, 13%);
+  --color-gold: hsl(47, 50%, 46.3%);
+  --color-white: #ffffff;
+
+  /* Color: diff */
+  --color-diff-added-word-bg: hsl(120, 25.5%, 32%);
+  --color-diff-removed-word-bg: hsl(0, 37%, 32%);
+
+  --color-diff-added-row-bg: hsla(123, 36%, 43%, 0.1);
+  --color-diff-added-row-linesnum-bg: hsla(123, 36%, 40%, 0.2);
+  --color-diff-added-row-border: hsl(134.4, 20%, 24%);
+  --color-diff-removed-row-bg: hsl(0, 20%, 20%);
+  --color-diff-removed-row-linesnum-bg: hsl(0, 25%, 23%);
+  --color-diff-removed-row-border: hsl(0, 19%, 33%);
+  --color-diff-moved-row-bg: hsl(59, 31%, 38.6%);
+  --color-diff-moved-row-border: hsl(69.2, 46%, 61%);
+
+  --color-diff-inactive: hsl(229, 14%, 13%);
+
+  /* Color: messages and status. */
+  --color-error-border: hsl(0, 42%, 44.1%);
+  --color-error-bg: hsl(0, 42.9%, 23%);
+  --color-error-bg-active: hsl(0, 27.3%, 37%);
+  --color-error-bg-hover: hsl(0, 33.3%, 30%);
+  --color-error-text: hsl(0, 79.3%, 88.6%);
+  --color-success-border: hsl(136, 33.3%, 40.6%);
+  --color-success-bg: hsl(150, 23%, 20%);
+  --color-success-text: hsl(116, 46%, 58.4%);
+  --color-warning-border: hsl(50, 100%, 37%);
+  --color-warning-bg: hsl(60, 9.4%, 20.8%);
+  --color-warning-text: hsl(44.7, 96.8%, 50.8%);
+  --color-info-border: hsl(210, 50%, 37.6%);
+  --color-info-bg: hsl(216.3, 33.3%, 22.4%);
+  --color-info-text: hsl(213deg, 89%, 64%);
+
+  --color-body: #202327;
+
+  --color-box-header: hsl(213, 12%, 22%);
+  --color-box-body: hsl(213, 12%, 18%);
+  --color-box-body-highlight: hsla(204deg, 60%, 15%, .15);
+
+  --color-text: #bbc0ca;
+  --color-text-dark: hsl(220, 26%, 89%);
+  --color-text-light: hsl(224, 9.2%, 68%);
+  --color-text-light-1: hsl(224, 7.8%, 62%);
+  --color-text-light-2: hsl(224, 6.8%, 57%);
+  --color-text-light-3: hsl(224.3, 9.3%, 48.4%);
+
+  /* "color-light" is actually a subtle black in dark themes, to darken an element.
+   * against different backgrounds.  */
+  --color-light: hsla(0, 0%, 0%, 0.2);
+  --color-light-mimic-enabled: rgba(0, 0, 0, calc(40 / 255 * 222 / 255 / var(--opacity-disabled)));
+  --color-light-border: hsla(0, 0%, 100%, 0.2);
+
+  --color-hover: hsla(213, 18%, 90%, .05);
+  --color-active: hsla(213, 18%, 90%, .1);
+
+  --color-menu: hsl(213, 12%, 21%);
+  --color-card: transparent;
+
+  --color-markup-table-row: hsla(0, 0%, 100%, 0);
+  --color-markup-code-block: hsla(0, 0%, 100%, 0.1);
+  --color-markup-code-inline: hsla(0, 0%, 100%, 0.1);
+
+  --color-code-bg: #1e2329;
+  --color-code-line-bg-hover: hsl(213, 16%, 16%);
+  --color-code-sidebar-bg: hsl(213, 15%, 21%);
+
+  --color-tooltip-text: #fbfdff;
+  --color-tooltip-bg: #000017f0;
+
+  /* Navbar. */
+  --color-navbar: hsl(213, 10%, 18%);
+  --color-nav-bg: hsl(213, 10%, 18%);
+  --color-nav-hover-bg: hsla(213, 18%, 90%, .05);
+  --color-header-wrapper: hsl(213, 10%, 18%);
+  --color-navbar-transparent: hsla(213, 10%, 14%, 0);
+  --color-header-bar: hsl(213, 10%, 18%);
+
+  /* Inputs. */
+  --color-input-text: #d6dbe6;
+  --color-input-background: #17191c;
+  --color-input-toggle-background: #454d57;
+  --color-input-border: #454d57;
+  --color-input-border-hover: #505668;
+  --color-placeholder-text: #6a737d;
+
+  --color-editor-line-highlight: var(--color-primary-light-5);
+  --color-project-board-bg: var(--color-secondary-light-2);
+
+  --color-highlight-fg: #87651e;
+  --color-highlight-bg: #352c1c;
+  --color-overlay-backdrop: #080808c0;
+
+  --color-button: #282d33;
+
+  --color-caret: var(--color-text);
+  --color-border: var(--color-secondary-alpha-40);
+
+  --color-reaction-bg: hsla(0, 0%, 100%, 0.1);
+  --color-reaction-active-bg: var(--color-primary-alpha-30);
+
+  --color-small-accent: var(--color-primary-light-5);
+  --color-active-line: hsl(53.6, 50.9%, 22%);
+
+  /* Labels. e.g. issues count indicator in repo tabs. */
+  --color-label-text: var(--color-text-light);
+  --color-label-bg: var(--color-secondary-alpha-60);
+  --color-label-active-bg: hsl(220, 10.6%, 33.3%);
+
+  /* Footer. */
+  --color-footer: hsl(213, 14.8%, 21%);
+  --color-footer-text: var(--color-text-light-3);
+  --color-footer-links: var(--color-text-light-1);
+}
+
+/* Custom styling of individual elements.
+ * Using !important is bad, but unfortunately gitea does it already in _base.less. */
+
+/* Primary button. */
+.ui.primary.button,
+.ui.primary.buttons .button {
+  background-color: var(--color-primary-bg) !important;
+  border-color: var(--color-primary-bg) !important;
+  color: var(--color-primary-text) !important;
+}
+
+a.ui.primary.label:hover,
+.ui.primary.button:hover,
+.ui.primary.buttons .button:hover {
+  background-color: var(--color-primary-hover) !important;
+  color: var(--color-primary-contrast) !important;
+}
+
+.ui.primary.label {
+  background-color: var(--color-primary-bg) !important;
+  border-color: var(--color-primary-bg) !important;
+  color: var(--color-primary) !important;
+}
+
+/* (from arc-green)
+ * invert emojis that are hard to read otherwise */
+.emoji[aria-label="check mark"],
+.emoji[aria-label="currency exchange"],
+.emoji[aria-label="TOP arrow"],
+.emoji[aria-label="END arrow"],
+.emoji[aria-label="ON! arrow"],
+.emoji[aria-label="SOON arrow"],
+.emoji[aria-label="heavy dollar sign"],
+.emoji[aria-label="copyright"],
+.emoji[aria-label="registered"],
+.emoji[aria-label="trade mark"],
+.emoji[aria-label="multiply"],
+.emoji[aria-label="plus"],
+.emoji[aria-label="minus"],
+.emoji[aria-label="divide"],
+.emoji[aria-label="curly loop"],
+.emoji[aria-label="double curly loop"],
+.emoji[aria-label="wavy dash"],
+.emoji[aria-label="paw prints"],
+.emoji[aria-label="musical note"],
+.emoji[aria-label="musical notes"] {
+  filter: invert(100%) hue-rotate(180deg);
+}
+
+/* Code syntax highlighting. */
+.tag-code .code-inner {
+  opacity: .5;
+}
+
+.same-code .lines-num.lines-num-old,
+.same-code .lines-num.lines-num-new {
+  color: var(--color-text-light-3) !important;
+}
+
+.add-code .lines-num.lines-num-old,
+.add-code .lines-num.lines-num-new {
+  background-color: var(--color-diff-added-row-linesnum-bg);
+  color: var(--color-text-dark-2) !important;
+}
+
+.del-code .lines-num.lines-num-old,
+.diff-unified .del-code .lines-num.lines-num-old,
+.del-code .lines-num.lines-num-new {
+  background-color: var(--color-diff-removed-row-linesnum-bg);
+  color: var(--color-text-dark-2) !important;
+}
+
+.repository .diff-file-box .file-body.file-code table tbody tr.add-code:hover .lines-num,
+.repository .diff-file-box .file-body.file-code table tbody tr.del-code:hover .lines-num,
+.repository .diff-file-box .file-body.file-code table tbody tr.same-code:hover .lines-num,
+.repository .diff-file-box .file-body.file-code table tbody .diff-unified tr:hover .del-code .lines-num {
+  color: var(--color-text-dark) !important;
+}
+
+.repository .diff-file-box .file-body.file-code table tbody tr.same-code:hover .lines-num {
+  color: var(--color-text-dark-2) !important;
+}
+
+.repository .diff-file-box .file-body.file-code table tbody tr.same-code:hover .lines-code,
+.repository .diff-file-box .file-body.file-code table tbody tr.same-code:hover .lines-num,
+.repository .diff-file-box .file-body.file-code table tbody tr.same-code:hover .lines-type-marker {
+  background-color: var(--color-code-line-bg-hover) !important;
+}
+
+/* From web_src/less/themes/chroma/dark.less */
+:root {
+  --color-syntax-NameBuiltinPseudo: #fabd2f;
+  --color-syntax-Comment: #777e94;
+  --color-syntax-CommentSingle: #777e94;
+  --color-syntax-CommentHashbang: #777e94;
+  --color-syntax-CommentMultiline: #777e94;
+  --color-syntax-CommentPreproc: #8ec07c;
+  --color-syntax-CommentPreprocFile: #649bc4;
+  --color-syntax-CommentSpecial: #9075cd;
+  --color-syntax-LiteralStringDelimiter: #649bc4;
+
+  --color-syntax-GenericDeleted-text: #fff;
+  --color-syntax-GenericDeleted-bg: #5f3737;
+  --color-syntax-GenericEmph: #ddee30;
+  --color-syntax-GenericHeading: #ffaa10;
+  --color-syntax-GenericInserted-text: #fff;
+  --color-syntax-GenericInserted-bg: #3a523a;
+  --color-syntax-GenericOutput: #777e94;
+  --color-syntax-GenericPrompt: #ebdbb2;
+  --color-syntax-GenericError: #ff4433;
+  --color-syntax-GenericStrong: #ebdbb2;
+  --color-syntax-GenericTraceback: #ff7540;
+  --color-syntax-GenericSubheading: #b8bb26;
+  --color-syntax-LineHighlight: #3f424d;
+  --color-syntax-LiteralNumberIntegerLong: #649bc4;
+  --color-syntax-Keyword: #f47067;
+  --color-syntax-KeywordConstant: #649bc4;
+  --color-syntax-KeywordDeclaration: #ff7540;
+  --color-syntax-KeywordNamespace: #ffaa10;
+  --color-syntax-KeywordPseudo: #5f8700;
+  --color-syntax-KeywordReserved: #ff7540;
+  --color-syntax-KeywordType: #fabd2f;
+  --color-syntax-LineNumbers: #7f8699;
+  --color-syntax-LineNumbersTable: #7f8699;
+  --color-syntax-LiteralNumber: #649bc4;
+  --color-syntax-LiteralNumberBin: #649bc4;
+  --color-syntax-LiteralNumberFloat: #649bc4;
+  --color-syntax-LiteralNumberHex: #649bc4;
+  --color-syntax-LiteralNumberInteger: #649bc4;
+  --color-syntax-LiteralNumberOct: #649bc4;
+  --color-syntax-Name: #adbac7;
+  --color-syntax-NameAttribute: #b8bb26;
+  --color-syntax-NameBuiltin: #fabd2f;
+  --color-syntax-NameClass: #f69d50;
+  --color-syntax-NameDecorator: #dcbdfb;
+  --color-syntax-NameException: #ff7540;
+  --color-syntax-NameFunction: #dcbdfb;
+  --color-syntax-NameEntity: #fabd2f;
+  --color-syntax-NameLabel: #ff7540;
+  --color-syntax-NameNamespace: #ffaa10;
+  --color-syntax-NameConstant: #649bc4;
+  --color-syntax-NameTag: #ff7540;
+  --color-syntax-NameVariable: #ebdbb2;
+  --color-syntax-NameOther: #b6bac5;
+  --color-syntax-Operator: #6cb6ff;
+  --color-syntax-OperatorWord: #6cb6ff;
+  --color-syntax-Punctuation: #d2d4db;
+  --color-syntax-LiteralString: #b8bb26;
+  --color-syntax-LiteralStringSingle: #96d0ff;
+  --color-syntax-LiteralStringDouble: #96d0ff;
+  --color-syntax-LiteralStringAffix: #649bc4;
+  --color-syntax-LiteralStringBacktick: #b8bb26;
+  --color-syntax-LiteralStringChar: #649bc4;
+  --color-syntax-LiteralStringDoc: #777e94;
+  --color-syntax-LiteralStringEscape: #ff7540;
+  --color-syntax-LiteralStringHeredoc: #649bc4;
+  --color-syntax-LiteralStringInterpol: #ffaa10;
+  --color-syntax-LiteralStringRegex: #9075cd;
+  --color-syntax-LiteralStringSymbol: #ff7540;
+  --color-syntax-LiteralStringOther: #ffaa10;
+  --color-syntax-NameVariableClass: #ff7540;
+  --color-syntax-NameVariableGlobal: #ffaa10;
+  --color-syntax-NameVariableInstance: #ffaa10;
+  --color-syntax-TextWhitespace: #7f8699;
+}
+
+.chroma .bp { color: var(--color-syntax-NameBuiltinPseudo) } /* NameBuiltinPseudo */
+.chroma .c { color: var(--color-syntax-Comment) } /* Comment */
+.chroma .c1 { color: var(--color-syntax-CommentSingle) } /* CommentSingle */
+.chroma .ch { color: var(--color-syntax-CommentHashbang) } /* CommentHashbang */
+.chroma .cm { color: var(--color-syntax-CommentMultiline) } /* CommentMultiline */
+.chroma .cp { color: var(--color-syntax-CommentPreproc) } /* CommentPreproc */
+.chroma .cpf { color: var(--color-syntax-CommentPreprocFile) } /* CommentPreprocFile */
+.chroma .cs { color: var(--color-syntax-CommentSpecial) } /* CommentSpecial */
+.chroma .dl { color: var(--color-syntax-LiteralStringDelimiter) } /* LiteralStringDelimiter */
+.chroma .gd { color: var(--color-syntax-GenericDeleted-text); background-color: var(--color-syntax-GenericDeleted-bg); } /* GenericDeleted */
+.chroma .ge { color: var(--color-syntax-GenericEmph); } /* GenericEmph */
+.chroma .gh { color: var(--color-syntax-GenericHeading); } /* GenericHeading */
+.chroma .gi { color: var(--color-syntax-GenericInserted-text); background-color: var(--color-syntax-GenericInserted-bg); } /* GenericInserted */
+.chroma .go { color: var(--color-syntax-GenericOutput); } /* GenericOutput */
+.chroma .gp { color: var(--color-syntax-GenericPrompt); } /* GenericPrompt */
+.chroma .gr { color: var(--color-syntax-GenericError); } /* GenericError */
+.chroma .gs { color: var(--color-syntax-GenericStrong); } /* GenericStrong */
+.chroma .gt { color: var(--color-syntax-GenericTraceback); } /* GenericTraceback */
+.chroma .gu { color: var(--color-syntax-GenericSubheading); } /* GenericSubheading */
+.chroma .hl { background-color: var(--color-syntax-LineHighlight); } /* LineHighlight */
+.chroma .il { color: var(--color-syntax-LiteralNumberIntegerLong); } /* LiteralNumberIntegerLong */
+.chroma .k { color: var(--color-syntax-Keyword); } /* Keyword */
+.chroma .kc { color: var(--color-syntax-KeywordConstant); } /* KeywordConstant */
+.chroma .kd { color: var(--color-syntax-KeywordDeclaration); } /* KeywordDeclaration */
+.chroma .kn { color: var(--color-syntax-KeywordNamespace); } /* KeywordNamespace */
+.chroma .kp { color: var(--color-syntax-KeywordPseudo); } /* KeywordPseudo */
+.chroma .kr { color: var(--color-syntax-KeywordReserved); } /* KeywordReserved */
+.chroma .kt { color: var(--color-syntax-KeywordType); } /* KeywordType */
+.chroma .ln { color: var(--color-syntax-LineNumbers); } /* LineNumbers */
+.chroma .lnt { color: var(--color-syntax-LineNumbersTable); } /* LineNumbersTable */
+.chroma .m { color: var(--color-syntax-LiteralNumber); } /* LiteralNumber */
+.chroma .mb { color: var(--color-syntax-LiteralNumberBin); } /* LiteralNumberBin */
+.chroma .mf { color: var(--color-syntax-LiteralNumberFloat); } /* LiteralNumberFloat */
+.chroma .mh { color: var(--color-syntax-LiteralNumberHex); } /* LiteralNumberHex */
+.chroma .mi { color: var(--color-syntax-LiteralNumberInteger); } /* LiteralNumberInteger */
+.chroma .mo { color: var(--color-syntax-LiteralNumberOct); } /* LiteralNumberOct */
+.chroma .n { color: var(--color-syntax-Name); } /* Name */
+.chroma .na { color: var(--color-syntax-NameAttribute); } /* NameAttribute */
+.chroma .nb { color: var(--color-syntax-NameBuiltin); } /* NameBuiltin */
+.chroma .nc { color: var(--color-syntax-NameClass); } /* NameClass */
+.chroma .nd { color: var(--color-syntax-NameDecorator); } /* NameDecorator */
+.chroma .ne { color: var(--color-syntax-NameException); } /* NameException */
+.chroma .nf { color: var(--color-syntax-NameFunction); } /* NameFunction */
+.chroma .ni { color: var(--color-syntax-NameEntity); } /* NameEntity */
+.chroma .nl { color: var(--color-syntax-NameLabel); } /* NameLabel */
+.chroma .nn { color: var(--color-syntax-NameNamespace); } /* NameNamespace */
+.chroma .no { color: var(--color-syntax-NameConstant); } /* NameConstant */
+.chroma .nt { color: var(--color-syntax-NameTag); } /* NameTag */
+.chroma .nv { color: var(--color-syntax-NameVariable); } /* NameVariable */
+.chroma .nx { color: var(--color-syntax-NameOther); } /* NameOther */
+.chroma .o { color: var(--color-syntax-Operator); } /* Operator */
+.chroma .ow { color: var(--color-syntax-OperatorWord); } /* OperatorWord */
+.chroma .p { color: var(--color-syntax-Punctuation); } /* Punctuation */
+.chroma .s { color: var(--color-syntax-LiteralString); } /* LiteralString */
+.chroma .s1 { color: var(--color-syntax-LiteralStringSingle); } /* LiteralStringSingle */
+.chroma .s2 { color: var(--color-syntax-LiteralStringDouble); } /* LiteralStringDouble */
+.chroma .sa { color: var(--color-syntax-LiteralStringAffix); } /* LiteralStringAffix */
+.chroma .sb { color: var(--color-syntax-LiteralStringBacktick); } /* LiteralStringBacktick */
+.chroma .sc { color: var(--color-syntax-LiteralStringChar); } /* LiteralStringChar */
+.chroma .sd { color: var(--color-syntax-LiteralStringDoc); } /* LiteralStringDoc */
+.chroma .se { color: var(--color-syntax-LiteralStringEscape); } /* LiteralStringEscape */
+.chroma .sh { color: var(--color-syntax-LiteralStringHeredoc); } /* LiteralStringHeredoc */
+.chroma .si { color: var(--color-syntax-LiteralStringInterpol); } /* LiteralStringInterpol */
+.chroma .sr { color: var(--color-syntax-LiteralStringRegex); } /* LiteralStringRegex */
+.chroma .ss { color: var(--color-syntax-LiteralStringSymbol); } /* LiteralStringSymbol */
+.chroma .sx { color: var(--color-syntax-LiteralStringOther); } /* LiteralStringOther */
+.chroma .vc { color: var(--color-syntax-NameVariableClass); } /* NameVariableClass */
+.chroma .vg { color: var(--color-syntax-NameVariableGlobal); } /* NameVariableGlobal */
+.chroma .vi { color: var(--color-syntax-NameVariableInstance); } /* NameVariableInstance */
+.chroma .w { color: var(--color-syntax-TextWhitespace); } /* TextWhitespace */
+
+/* From web_src/less/codemirror/dark.less */
+.CodeMirror.cm-s-default .cm-property, .CodeMirror.cm-s-paper .cm-property {
+	 color: #a0cc75;
+}
+ .CodeMirror.cm-s-default .cm-header, .CodeMirror.cm-s-paper .cm-header {
+	 color: #9daccc;
+}
+ .CodeMirror.cm-s-default .cm-quote, .CodeMirror.cm-s-paper .cm-quote {
+	 color: #009900;
+}
+ .CodeMirror.cm-s-default .cm-keyword, .CodeMirror.cm-s-paper .cm-keyword {
+	 color: #cc8a61;
+}
+ .CodeMirror.cm-s-default .cm-atom, .CodeMirror.cm-s-paper .cm-atom {
+	 color: #ef5e77;
+}
+ .CodeMirror.cm-s-default .cm-number, .CodeMirror.cm-s-paper .cm-number {
+	 color: #ff5656;
+}
+ .CodeMirror.cm-s-default .cm-def, .CodeMirror.cm-s-paper .cm-def {
+	 color: #e4e4e4;
+}
+ .CodeMirror.cm-s-default .cm-variable-2, .CodeMirror.cm-s-paper .cm-variable-2 {
+	 color: #00bdbf;
+}
+ .CodeMirror.cm-s-default .cm-variable-3, .CodeMirror.cm-s-paper .cm-variable-3 {
+	 color: #008855;
+}
+ .CodeMirror.cm-s-default .cm-comment, .CodeMirror.cm-s-paper .cm-comment {
+	 color: #8e9ab3;
+}
+ .CodeMirror.cm-s-default .cm-string, .CodeMirror.cm-s-paper .cm-string {
+	 color: #a77272;
+}
+ .CodeMirror.cm-s-default .cm-string-2, .CodeMirror.cm-s-paper .cm-string-2 {
+	 color: #ff5500;
+}
+ .CodeMirror.cm-s-default .cm-meta, .CodeMirror.cm-s-default .cm-qualifier, .CodeMirror.cm-s-paper .cm-meta, .CodeMirror.cm-s-paper .cm-qualifier {
+	 color: #ffb176;
+}
+ .CodeMirror.cm-s-default .cm-builtin, .CodeMirror.cm-s-paper .cm-builtin {
+	 color: #b7c951;
+}
+ .CodeMirror.cm-s-default .cm-bracket, .CodeMirror.cm-s-paper .cm-bracket {
+	 color: #999977;
+}
+ .CodeMirror.cm-s-default .cm-tag, .CodeMirror.cm-s-paper .cm-tag {
+	 color: #f1d273;
+}
+ .CodeMirror.cm-s-default .cm-attribute, .CodeMirror.cm-s-paper .cm-attribute {
+	 color: #bfcc70;
+}
+ .CodeMirror.cm-s-default .cm-hr, .CodeMirror.cm-s-paper .cm-hr {
+	 color: #999999;
+}
+ .CodeMirror.cm-s-default .cm-url, .CodeMirror.cm-s-paper .cm-url {
+	 color: #c5cfd0;
+}
+ .CodeMirror.cm-s-default .cm-link, .CodeMirror.cm-s-paper .cm-link {
+	 color: #d8c792;
+}
+ .CodeMirror.cm-s-default .cm-error, .CodeMirror.cm-s-paper .cm-error {
+	 color: #dbdbeb;
+}
