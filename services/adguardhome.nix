@@ -46,6 +46,7 @@ in {
       "@@||wordpress.com^$important"
       "@@||tailscale.com^$important"
       "@@||torproject.org^$important"
+      "@@||neocities.org^$important"
     ];
   };
 }
