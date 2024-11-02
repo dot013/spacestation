@@ -164,7 +164,7 @@
   --color-markup-code-block: hsla(0, 0%, 100%, 0.1);
   --color-markup-code-inline: hsla(0, 0%, 100%, 0.1);
 
-  --color-code-bg: #1e2329;
+  /* --color-code-bg: var(--color-box-body); */
   --color-code-line-bg-hover: hsl(213, 16%, 16%);
   --color-code-sidebar-bg: hsl(213, 15%, 21%);
 
@@ -317,6 +317,11 @@ a.ui.primary.label:hover,
 }
 
 /* Code syntax highlighting. */
+::selection {
+  background: var(--color-dark-3) !important;
+  color: var(--color-light-1) !important;
+}
+
 .tag-code .code-inner {
   opacity: .5;
 }
