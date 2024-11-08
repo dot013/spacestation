@@ -11,7 +11,7 @@ in {
   services.caddy.xcaddy.enable = true;
   services.caddy.email = secrets.capytal.caddy.email;
   services.caddy.extraConfig = ''
-    (capytal_tls) {
+    (capytal_env) {
       tls {
         dns cloudflare {
           zone_token {env.CAPYTAL_CF_ZONE_TOKEN}
@@ -19,7 +19,7 @@ in {
         }
       }
     }
-    (home_tls) {
+    (home_env) {
       tls {
         dns cloudflare {
           zone_token {env.HOME_CF_ZONE_TOKEN}
@@ -28,7 +28,7 @@ in {
       }
     }
   '';
-  services.caddy.virtualHosts = let
+  services.caddy.virtualHosts = with builtins; let
     caddyCfg = secrets.capytal.caddy;
     setConfig = c: let
       reverse_proxy =
@@ -42,18 +42,34 @@ in {
         if c ? redir
         then "redir ${c.redir}"
         else "";
+
+      auth =
+        if c ? auth
+        then ''
+          basic_auth {
+          ${
+            concatStringsSep "\n" (map (v: "${v.user} ${v.passwd}") c.auth)
+          }
+          }
+        ''
+        else "";
     in {
       extraConfig = ''
         ${reverse_proxy}
         ${redir}
+        ${auth}
         import ${
           if c ? env
           then c.env
-          else "capytal_tls"
+          else "capytal_env"
         }
       '';
     };
-    hosts = lib.attrsets.mapAttrs (n: v: setConfig v) caddyCfg.hosts;
+    hosts = listToAttrs (map (v: {
+        name = v.pattern;
+        value = setConfig v.config;
+      })
+      caddyCfg.hosts);
   in
     hosts;
   systemd.services.caddy.serviceConfig = {
