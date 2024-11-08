@@ -6,10 +6,21 @@
 		--fonts-proportional: "Red Hat Display", "Noto Sans", "Liberation Sans", sans-serif, var(--fonts-emoji) !important;
 	}
 	@font-face {
-		family: "Cal Sans";
+		font-family: "Cal Sans";
 		src:
-			url('assets/fonts/CalSans-SemiBold.woff2') format('woff2'),
-			url('assets/fonts/CalSans-SemiBold.woff') format('woff'),
-			url('assets/fonts/CalSans-SemiBold.ttf') format('truetype');
-	};
+			url('assets/fonts/CalSans.woff2') format('woff2'),
+			url('assets/fonts/CalSans.woff') format('woff'),
+			url('assets/fonts/CalSans.ttf') format('truetype'),
+			local("Red Hat Display"), local("Noto Sans");
+	}
+
+	a#navbar-logo {
+		display: none !important;
+		width: 0 !important;
+		height: 0 !important;
+	}
+
+	div.org-title {
+		font-family: "Cal Sans";
+	}
 </style>
