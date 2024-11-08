@@ -1,5 +1,5 @@
 /* capytal dark theme */
-:root {
+:root * {
   --is-dark-theme: true;
 
   /* Colors. */

@@ -62,7 +62,7 @@ in {
         DISABLE_REGISTRATION = true;
       };
       ui = {
-        DEFAULT_THEME = "frappurccino";
+        DEFAULT_THEME = "capytal-dark";
       };
     };
   };

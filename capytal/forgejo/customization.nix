@@ -30,7 +30,7 @@ in {
     templates = ./templates;
     theme = {
       "frappurccino" = frappurccino-theme;
-      "capytal-dark-b" = ./themes/theme-capytal-dark.css;
+      "capytal-dark" = ./themes/theme-capytal-dark.css;
       "bthree-dark" = ./themes/theme-bthree-dark.css;
     };
     options.label."Default" = with config.scheme.withHashtag; {
