@@ -19,6 +19,14 @@ in {
         }
       }
     }
+    (home_tls) {
+      tls {
+        dns cloudflare {
+          zone_token {env.HOME_CF_ZONE_TOKEN}
+          api_token {env.HOME_CF_API_TOKEN}
+        }
+      }
+    }
   '';
   services.caddy.virtualHosts = let
     caddyCfg = secrets.capytal.caddy;
@@ -38,7 +46,11 @@ in {
       extraConfig = ''
         ${reverse_proxy}
         ${redir}
-        import capytal_tls
+        import ${
+          if c ? env
+          then c.env
+          else "capytal_tls"
+        }
       '';
     };
     hosts = lib.attrsets.mapAttrs (n: v: setConfig v) caddyCfg.hosts;
