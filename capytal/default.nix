@@ -8,5 +8,4 @@
     ./sqld.nix
   ];
 
-  scheme = catppuccin-base16;
 }
