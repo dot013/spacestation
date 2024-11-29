@@ -1,35 +1,11 @@
 {
-  config,
-  inputs,
   pkgs,
-  pkgs-unstable,
   ...
-}:
-with builtins; let
-  frappurccino-theme =
-    readFile
-    "${inputs.frappurccino-forgejo.packages.${pkgs.system}.default}/css/theme-frappurccino-mocha-sky.css";
-
-  cal-sans = pkgs.fetchzip {
-    url = "https://github.com/calcom/font/releases/download/v1.0.0/CalSans_Semibold_v1.0.0.zip";
-    stripRoot = false;
-    hash = "sha256-JqU64JUgWimJgrKX3XYcml8xsvy//K7O5clNKJRGaTM=";
-  };
-  fonts-css = pkgs.writeText "custom.css" ''
-    @font-face {
-      family: 'Cal Sans';
-      src:
-        url('assets/fonts/CalSans-SemiBold.woff2') format('woff2'),
-        url('assets/fonts/CalSans-SemiBold.woff') format('woff'),
-        url('assets/fonts/CalSans-SemiBold.ttf') format('truetype');
-    };
-  '';
-in {
+}: {
   services.forgejo.customization = {
     assets = ./assets;
     templates = ./templates;
     theme = {
-      "frappurccino" = frappurccino-theme;
       "capytal-dark" = ./themes/theme-capytal-dark.css;
       "bthree-dark" = ./themes/theme-bthree-dark.css;
     };
