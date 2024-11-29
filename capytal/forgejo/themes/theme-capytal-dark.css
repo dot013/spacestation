@@ -282,6 +282,26 @@ a.ui.primary.label:hover,
   position: absolute;
 }
 
+
+
+.markup input[type="checkbox"] {
+  width: 1.1rem;
+  height: 1.1rem;
+  -webkit-mask: var(--icon-minus-quare-line-duotone) no-repeat;
+  mask: var(--icon-minus-quare-line-duotone) no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  background-color: currentColor;
+  color: var(--color-primary-text);
+  position: absolute;
+  margin-top: 0.25rem !important;
+}
+
+.markup input[type="checkbox"]:checked {
+  -webkit-mask: var(--icon-check-square-bold) no-repeat;
+  mask: var(--icon-check-square-bold) no-repeat;
+}
+
 /* Tabs */
 .ui.secondary.pointing.menu .active.item,
 .ui.secondary.pointing.menu .active.item:hover,
