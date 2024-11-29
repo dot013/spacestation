@@ -33,102 +33,102 @@ in {
       "capytal-dark" = ./themes/theme-capytal-dark.css;
       "bthree-dark" = ./themes/theme-bthree-dark.css;
     };
-    options.label."Default" = with config.scheme.withHashtag; {
+    options.label."Default" = {
       "scope/a11y" = {
-        color = base06;
+        color = "d4b3a5";
         description = "Accessibility issues and improvements";
         exclusive = true;
       };
       "scope/i18n" = {
-        color = base0F;
+        color = "dbb594";
         description = "Internationalization issues and improvements";
         exclusive = true;
       };
       "scope/security" = {
-        color = base08;
+        color = "ff977d";
         description = "Test suite changes";
         exclusive = true;
       };
       "scope/documentation" = {
-        color = base0E;
+        color = "e796f3";
         description = "Documentation changes";
         exclusive = true;
       };
       "scope/testing" = {
-        color = base0E;
+        color = "ff949d";
         description = "Test suite changes";
         exclusive = true;
       };
       "kind/enhancement" = {
-        color = base0C;
+        color = "4ccce6";
         description = "Improvement on existing functionality";
         exclusive = true;
       };
       "kind/bug" = {
-        color = base0D;
+        color = "70b8ff";
         description = "Something isn't working";
         exclusive = true;
       };
       "kind/feature" = {
-        color = base07;
+        color = "9eb1ff";
         description = "New functionality";
         exclusive = true;
       };
       "priority/low" = {
-        color = base0B;
+        color = "bde56c";
         description = "The priority is low";
         exclusive = true;
         priority = "low";
       };
       "priority/medium" = {
-        color = base0A;
+        color = "f5e147";
         description = "The priority is medium";
         exclusive = true;
         priority = "medium";
       };
       "priority/high" = {
-        color = base09;
+        color = "ff9592";
         description = "The priority is high";
         exclusive = true;
         priority = "high";
       };
       "priority/critical" = {
-        color = base08;
+        color = "ff977d";
         description = "The priority is high";
         exclusive = true;
         priority = "critical";
       };
       "BREAKING-CHANGE" = {
-        color = base05;
+        color = "b4b4b4";
         description = "This change breaks existing functionality";
       };
       "status/to-do" = {
-        color = base0B;
+        color = "71d083";
         description = "This is confirmed and needs work";
         exclusive = true;
       };
       "status/in-progress" = {
-        color = base0A;
+        color = "f5e147";
         description = "This is being worked on";
         exclusive = true;
       };
       "status/needs-info" = {
-        color = base09;
+        color = "ffa057";
         description = "This needs more information to continue";
         exclusive = true;
       };
       "status/blocked" = {
-        color = base08;
+        color = "ff977d";
         description = "This is blocked due to something";
         exclusive = true;
       };
       "status/abandoned" = {
-        color = base05;
+        color = "b6ecf7";
         description = "This is in hiatus/abandoned until further notice";
         exclusive = true;
       };
       "status/wont-fix" = {
-        color = base0E;
+        color = "b5b3ad";
         description = "This issue won't be fixed";
         exclusive = true;
       };
