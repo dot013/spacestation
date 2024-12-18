@@ -1,8 +1,4 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{config, ...}: let
   secrets = config.spacestation-secrets.lesser;
 in {
   imports = [];
