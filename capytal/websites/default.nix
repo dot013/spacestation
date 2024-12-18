@@ -1,0 +1,5 @@
+{...}: {
+  imports = [
+    ./keikos.work.nix
+  ];
+}

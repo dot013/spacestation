@@ -6,6 +6,7 @@
     ./garage.nix
     ./music-bot.nix
     ./sqld.nix
-  ];
 
+    ./websites
+  ];
 }

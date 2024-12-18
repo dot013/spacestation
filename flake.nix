@@ -30,10 +30,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    frappurccino-forgejo = {
-      # url = "git+file:///home/guz/.projects/capytal/frappurccino-forgejo";
-      url = "git+https://forgejo.capytal.company/capytal/frappurccino-forgejo";
-      inputs.nixpkgs.follows = "nixpkgs";
+    keikoswork = {
+      url = "git+https://forge.capytal.company/guz013/keikos.work";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
   };
   outputs = {
