@@ -1,13 +1,9 @@
 {
   config,
-  lib,
-  inputs,
   pkgs,
-  pkgs-unstable,
   ...
 }: {
   imports = [
-    inputs.dot013-environment.nixosModules.default
     ./hardware-configuration.nix
     ./services
     ./modules
@@ -20,12 +16,11 @@
 
   profiles.locale.enable = true;
 
-  home-manager.backupFileExtension = "backup~";
-  home-manager.extraSpecialArgs = {
-    inherit inputs;
-    inherit pkgs;
-    inherit pkgs-unstable;
-  };
+  programs.zsh.enable = true;
+
+  programs.mosh.enable = true;
+  programs.mosh.openFirewall = true;
+
   users.users."guz" = {
     shell = pkgs.zsh;
     hashedPasswordFile = builtins.toString config.sops.secrets."guz/password".path;
@@ -36,10 +31,6 @@
       ./.ssh/guz.pub
     ];
   };
-  home-manager.users."guz" = import ./homes/guz.nix;
-
-  dot013.environment.enable = true;
-  dot013.environment.interception-tools.enable = false;
 
   programs.gnupg.agent = {
     enable = true;
