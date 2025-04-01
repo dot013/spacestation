@@ -34,6 +34,10 @@ in {
       owner = config.users.users."guz".name;
     };
 
+    sops.secrets."keiko/envFile" = {
+      owner = config.services.keikos.web.user;
+    };
+
     sops.secrets."forgejo/user1/name" = mkIf config.services.forgejo.enable {
       owner = config.services.forgejo.user;
     };
