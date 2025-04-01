@@ -20,11 +20,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    dot013-environment = {
-      url = "github:dot013/environment";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
     base16 = {
       url = "github:SenchoPens/base16.nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -33,6 +28,10 @@
     keikoswork = {
       url = "git+https://forge.capytal.company/guz013/keikos.work";
       # inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    dot013-nix = {
+      url = "git+https://forge.capytal.company/dot013/nix";
     };
   };
   outputs = {
@@ -72,5 +71,6 @@
         ];
       };
     };
+    homeConfigurations.worm = inputs.dot013-nix.homeConfigurations."x86_64-linux".worm;
   };
 }
