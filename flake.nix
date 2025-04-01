@@ -25,6 +25,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    capytalcc = {
+      url = "git+https://forge.capytal.company/capytal/capytal.cc";
+      # inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     keikoswork = {
       url = "git+https://forge.capytal.company/guz013/keikos.work";
       # inputs.nixpkgs.follows = "nixpkgs";
