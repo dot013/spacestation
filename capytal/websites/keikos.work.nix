@@ -12,5 +12,6 @@ in {
   services.keikos.web = {
     enable = true;
     port = secrets.guz.services."keikos.work".port;
+    envFile = config.sops.secrets."keiko/envFile".path;
   };
 }
