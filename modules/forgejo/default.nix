@@ -153,6 +153,7 @@ in {
       };
 
       virtualisation.docker.enable = mkIf cfg.actions.enable (mkDefault true);
+      virtualisation.oci-containers.backend = mkIf cfg.actions.enable (mkDefault "docker");
       services.gitea-actions-runner = mkIf cfg.actions.enable {
         package =
           if config.services.gitea.enable
