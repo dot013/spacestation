@@ -1,6 +1,6 @@
 {inputs, ...}: {
   imports = [
-    ./cloudflare.nix
+    ./analytics.nix
     ./network.nix
     ./websites.nix
 
