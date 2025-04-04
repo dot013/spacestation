@@ -19,15 +19,13 @@ in {
     virtualisation.oci-containers.containers.medama = {
       image = "ghcr.io/medama-io/medama:v0.5.2";
       autoStart = true;
-      ports = [
-        "${cfg.port}:8080"
-      ];
+      extraOptions = ["--network=host"];
       volumes = [
         "/var/lib/medama/data:/app/data"
       ];
       environment = {
         AUTO_SLL = toString cfg.ssl;
-        PORT = toString 8080;
+        PORT = toString cfg.port;
       };
     };
   };

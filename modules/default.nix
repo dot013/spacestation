@@ -4,6 +4,7 @@
     ./anubis
     ./forgejo
     ./locales.nix
+    ./medama.nix
     ./nh
     ./tailscale.nix
     ./xcaddy
