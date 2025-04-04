@@ -1,11 +1,8 @@
 {
   config,
-  inputs,
-  pkgs,
   pkgs-unstable,
   ...
-}:
-with builtins; let
+}: let
   secrets = config.spacestation-secrets.lesser;
   forgejoCfg = secrets.capytal.services.forgejo;
 in {

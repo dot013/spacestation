@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{...}: {
   services.forgejo.customization = {
     assets = ./assets;
     templates = ./templates;

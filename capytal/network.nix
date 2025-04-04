@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs-unstable,
-  ...
-}: {
+{config, ...}: {
   imports = [];
 
   services.caddy.enable = true;
@@ -30,9 +26,7 @@
     };
   };
 
-  virtualisation.oci-containers.containers.cloudflare-tunnel = let
-    secrets = config.spacestation-secrets.lesser;
-  in {
+  virtualisation.oci-containers.containers.cloudflare-tunnel = {
     image = "cloudflare/cloudflared:latest";
     autoStart = true;
     extraOptions = [
@@ -42,7 +36,6 @@
       "tunnel"
       "--no-autoupdate"
       "run"
-      # secrets.capytal.cloudflare-funnel
     ];
     environmentFiles = [
       config.sops.secrets."cloudflared/tunnel-env".path
