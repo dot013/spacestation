@@ -1,6 +1,7 @@
 {...}: {
   imports = [
     ./adguardhome.nix
+    ./anubis
     ./forgejo
     ./locales.nix
     ./nh
