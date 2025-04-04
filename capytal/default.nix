@@ -1,8 +1,9 @@
 {inputs, ...}: {
   imports = [
-    ./caddy.nix
     ./cloudflare.nix
+    ./network.nix
     ./websites.nix
+
     ./forgejo
     ./garage.nix
     ./sqld.nix
