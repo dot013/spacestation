@@ -3,7 +3,7 @@
   fetchFromGitHub,
   ...
 }:
-buildGoModule rec {
+buildGoModule {
   name = "Anubis";
   pname = "anubis";
   version = "1.15.2";

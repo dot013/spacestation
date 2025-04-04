@@ -7,6 +7,5 @@
     ./medama.nix
     ./nh
     ./tailscale.nix
-    ./xcaddy
   ];
 }
