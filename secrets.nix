@@ -34,7 +34,7 @@ in {
       owner = config.users.users."guz".name;
     };
 
-    sops.secrets."keiko/envFile" = {
+    sops.secrets."keiko/env-file" = {
       owner = config.services.keikos.web.user;
     };
 
@@ -51,11 +51,7 @@ in {
       owner = config.services.forgejo.user;
     };
 
-    sops.secrets."discord/muse-bot/environment" = {};
-
-    sops.secrets."caddy/capytal/env" = mkIf config.services.caddy.enable {
-      owner = config.services.caddy.user;
-    };
+    sops.secrets."cloudflared/tunnel-env" = {};
 
     sops.age.keyFile = "/home/guz/.config/sops/age/keys.txt";
   };

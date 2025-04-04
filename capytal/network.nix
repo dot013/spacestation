@@ -30,7 +30,7 @@
     };
   };
 
-  virtualisation.oci-containers.containers.cloudflare-funnel = let
+  virtualisation.oci-containers.containers.cloudflare-tunnel = let
     secrets = config.spacestation-secrets.lesser;
   in {
     image = "cloudflare/cloudflared:latest";
@@ -42,10 +42,11 @@
       "tunnel"
       "--no-autoupdate"
       "run"
-      "--token"
-      secrets.capytal.cloudflare-funnel
+      # secrets.capytal.cloudflare-funnel
     ];
-    environment = {};
+    environmentFiles = [
+      config.sops.secrets."cloudflared/tunnel-env".path
+    ];
   };
 
   networking.firewall.allowedTCPPorts = [

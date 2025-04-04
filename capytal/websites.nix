@@ -21,7 +21,7 @@
   services.keikos.web = {
     enable = true;
     port = 7030;
-    envFile = config.sops.secrets."keiko/envFile".path;
+    envFile = config.sops.secrets."keiko/env-file".path;
   };
   services.caddy.virtualHosts.":${toString (config.services.keikos.web.port + 1)}" = {
     extraConfig = ''
