@@ -11,4 +11,11 @@ in {
       }
     '';
   };
+
+  services.anubis.instances."medama" = {
+    bind = ":${toString (port + 2)}";
+    metricsBind = ":${toString (port + 3)}";
+    serveRobotsTxt = true;
+    target = "http://localhost:${toString port}";
+  };
 }
