@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{...}: {
   imports = [
     ./analytics.nix
     ./network.nix

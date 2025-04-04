@@ -17,6 +17,19 @@
       '';
     };
   };
+
+  services.anubis.enable = true;
+  services.anubis.instances = {
+    "forgejo" = let
+      forgejo-port = config.services.forgejo.settings.server.HTTP_PORT;
+    in {
+      bind = ":${toString (forgejo-port + 20)}";
+      metricsBind = ":${toString (forgejo-port + 30)}";
+      serveRobotsTxt = true;
+      target = "http://localhost:${toString forgejo-port}";
+    };
+  };
+
   virtualisation.oci-containers.containers.cloudflare-funnel = let
     secrets = config.spacestation-secrets.lesser;
   in {
