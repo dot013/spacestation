@@ -155,11 +155,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1743507918,
-        "narHash": "sha256-aXemOvQ5NM4QE/e+nxRfaSWKJjRDUVz+7rWzYTIsHC0=",
+        "lastModified": 1743871286,
+        "narHash": "sha256-B6DJpSdRCjTgJsTmJsm6BlkMJJIDoQ5ws+M7lrYpjVY=",
         "ref": "refs/heads/main",
-        "rev": "86296aa1e8c3c7887c216a7a04dd045474850e46",
-        "revCount": 64,
+        "rev": "6e5f1434d8f0682a62d9684cbefd1e0c31ce5f70",
+        "revCount": 68,
         "type": "git",
         "url": "https://forge.capytal.company/capytal/capytal.cc"
       },
