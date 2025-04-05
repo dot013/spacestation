@@ -22,5 +22,6 @@ in {
     metricsBind = ":${toString (port + 3)}";
     serveRobotsTxt = true;
     target = "http://localhost:${toString port}";
+    ed25519PrivateKeyHexFile = config.sops.secrets."medama/anubis/hexFile".path;
   };
 }

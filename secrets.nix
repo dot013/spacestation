@@ -50,6 +50,13 @@ in {
     sops.secrets."forgejo/git-password" = mkIf config.services.forgejo.enable {
       owner = config.services.forgejo.user;
     };
+    sops.secrets."forgejo/anubis/hexFile" = {
+      owner = config.services.anubis.instances."forgejo".user;
+    };
+
+    sops.secrets."medama/anubis/hexFile" = {
+      owner = config.services.anubis.instances."medama".user;
+    };
 
     sops.secrets."cloudflared/tunnel-env" = {};
 

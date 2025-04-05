@@ -23,6 +23,7 @@
       metricsBind = ":${toString (forgejo-port + 30)}";
       serveRobotsTxt = true;
       target = "http://localhost:${toString forgejo-port}";
+      ed25519PrivateKeyHexFile = config.sops.secrets."forgejo/anubis/hexFile".path;
     };
   };
 
