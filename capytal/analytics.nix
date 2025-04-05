@@ -3,6 +3,9 @@
 in {
   services.medama.enable = true;
   services.medama.port = 6010;
+  services.medama.cors = [
+    "forge.capytal.company"
+  ];
 
   services.caddy.virtualHosts.":${toString (port + 1)}" = {
     extraConfig = ''
