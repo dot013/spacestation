@@ -6,6 +6,8 @@ in {
 
   services.caddy.virtualHosts.":${toString (port + 1)}" = {
     extraConfig = ''
+      reverse_proxy /api/* http://localhost:${toString port}
+
       reverse_proxy http://localhost:${toString (port + 2)} {
         header_up X-Real-Ip {remote_host}
       }
