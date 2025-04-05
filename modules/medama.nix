@@ -14,6 +14,11 @@ in {
       type = with types; port;
       default = 8080;
     };
+    cors = mkOption {
+      type = with types; listOf str;
+      default = [];
+      apply = v: concatStringsSep "," v;
+    };
   };
   config = mkIf cfg.enable {
     virtualisation.oci-containers.containers.medama = {
@@ -26,6 +31,7 @@ in {
       environment = {
         AUTO_SLL = toString cfg.ssl;
         PORT = toString cfg.port;
+        CORS_ALLOWED_ORIGINS = cfg.cors;
       };
     };
   };
