@@ -1,10 +1,10 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -25,7 +25,7 @@
 
     capytalcc = {
       url = "git+https://forge.capytal.company/capytal/capytal.cc";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     keikoswork = {
@@ -34,39 +34,26 @@
     };
 
     dot013-nix = {
-      url = "git+https://forge.capytal.company/dot013/nix";
+      url = "github:dot013/nix";
     };
   };
   outputs = {
+    self,
     nixpkgs,
     home-manager,
     nixpkgs-unstable,
     ...
   } @ inputs: {
-    nixosConfigurations = let
-      systemSettings = {
+    nixosConfigurations = {
+      spacestation = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
-      };
-      pkgs = import nixpkgs {
-        system = systemSettings.system;
-        config = {
-          allowUnfree = true;
-          allowUnfreePredicate = _: true;
-        };
-      };
-      pkgs-unstable = import nixpkgs-unstable {
-        system = systemSettings.system;
-        config = {
-          allowUnfree = true;
-          allowUnfreePredicate = _: true;
-        };
-      };
-    in {
-      spacestation = nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit inputs;
-          inherit pkgs;
-          inherit pkgs-unstable;
+          pkgs-unstable = import nixpkgs-unstable {
+            inherit system;
+            config.allowUnfree = true;
+            config.allowUnfreePredicate = _: true;
+          };
+          inherit inputs self;
         };
         modules = [
           inputs.home-manager.nixosModules.default
@@ -74,6 +61,9 @@
         ];
       };
     };
-    homeConfigurations.worm = inputs.dot013-nix.homeConfigurations."x86_64-linux".worm;
+    nixosModules = {
+      medama = ./modules/medama.nix;
+    };
+    # homeConfigurations.worm = inputs.dot013-nix.homeConfigurations."x86_64-linux".worm;
   };
 }
