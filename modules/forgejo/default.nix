@@ -154,23 +154,23 @@ in {
 
       virtualisation.docker.enable = mkIf cfg.actions.enable (mkDefault true);
       virtualisation.oci-containers.backend = mkIf cfg.actions.enable (mkDefault "docker");
-      services.gitea-actions-runner = mkIf cfg.actions.enable {
-        package =
-          if config.services.gitea.enable
-          then pkgs.gitea-actions-runner
-          else pkgs.forgejo-actions-runner;
-        instances."forgejo${toString cfg.settings.server.HTTP_PORT}" = {
-          enable = mkDefault true;
-          token = mkDefault cfg.actions.token;
-          name = mkDefault "${cfg.settings.DEFAULT.APP_NAME} - Actions";
-          url = cfg.actions.url;
-          labels = mkDefault cfg.actions.labels;
-          settings = {
-            runner = {
-              insecure = true;
-            };
-          };
-        };
-      };
+      # services.gitea-actions-runner = mkIf cfg.actions.enable {
+      #   package =
+      #     if config.services.gitea.enable
+      #     then pkgs.gitea-actions-runner
+      #     else pkgs.forgejo-actions-runner;
+      #   instances."forgejo${toString cfg.settings.server.HTTP_PORT}" = {
+      #     enable = mkDefault true;
+      #     token = mkDefault cfg.actions.token;
+      #     name = mkDefault "${cfg.settings.DEFAULT.APP_NAME} - Actions";
+      #     url = cfg.actions.url;
+      #     labels = mkDefault cfg.actions.labels;
+      #     settings = {
+      #       runner = {
+      #         insecure = true;
+      #       };
+      #     };
+      #   };
+      # };
     };
 }

@@ -1,25 +1,21 @@
 {
+  inputs,
   config,
   pkgs,
   ...
 }: {
   imports = [
-    ./hardware-configuration.nix
-    ./services
-    ./modules
-    ./secrets.nix
     ./capytal
+    ./abaduh
+    ./common
+
+    ./secrets.nix
+
+    ./hardware-configuration.nix
   ];
 
-  programs.nh.enable = true;
-  programs.nh.flake = "/home/guz/nix";
-
-  profiles.locale.enable = true;
-
+  # User settings
   programs.zsh.enable = true;
-
-  programs.mosh.enable = true;
-  programs.mosh.openFirewall = true;
 
   users.users."guz" = {
     shell = pkgs.zsh;
@@ -30,8 +26,20 @@
     openssh.authorizedKeys.keyFiles = [
       ./.ssh/guz.pub
     ];
+    packages = with pkgs;
+      [
+        libinput
+      ]
+      ++ (with inputs.dot013-nix.packages.${pkgs.system}.devkit; [
+        git
+        lazygit
+        starship
+        zellij
+        zsh
+      ]);
   };
 
+  # GnuPG
   programs.gnupg.agent = {
     enable = true;
     pinentryPackage = pkgs.pinentry-gnome3;
@@ -40,41 +48,62 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    git
-    libinput
-  ];
+  security.rtkit.enable = true;
 
+  # Nix commands
   nix.settings.experimental-features = ["nix-command" "flakes"];
-  nix.package = pkgs.nixVersions.nix_2_21;
   nix.gc = {
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 10d";
   };
 
+  programs.nh.enable = true;
+  programs.nh.flake = "/home/guz/nix";
+
+  # Locale settings
+  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.extraLocaleSettings = rec {
+    LC_ADDRESS = "pt_BR.UTF-8";
+    LC_IDENTIFICATION = LC_ADDRESS;
+    LC_MEASUREMENT = LC_ADDRESS;
+    LC_MONETARY = LC_ADDRESS;
+    LC_NAME = LC_ADDRESS;
+    LC_NUMERIC = LC_ADDRESS;
+    LC_PAPER = LC_ADDRESS;
+    LC_TELEPHONE = LC_ADDRESS;
+    LC_TIME = LC_ADDRESS;
+  };
+
+  console.keyMap = "br-abnt2";
+
+  time.timeZone = "America/Sao_Paulo";
+
+  # Networking
   networking = {
     networkmanager.enable = true;
     hostName = "spacestation";
     wireless.enable = false;
     dhcpcd.enable = true;
-    defaultGateway = "${config.spacestation-secrets.lesser.devices.defaultGateway}";
+    defaultGateway = "192.168.0.1";
     interfaces."eno1".ipv4.addresses = [
       {
-        address = "${config.spacestation-secrets.lesser.devices.spacestation}";
+        address = "192.168.0.110";
         prefixLength = 24;
       }
     ];
     nameservers = ["9.9.9.9"];
   };
 
+  # SSH/Mosh configuration
   services.openssh.enable = true;
   services.openssh.settings = {
     PasswordAuthentication = false;
     PermitRootLogin = "forced-commands-only";
   };
 
-  security.rtkit.enable = true;
+  programs.mosh.enable = true;
+  programs.mosh.openFirewall = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
