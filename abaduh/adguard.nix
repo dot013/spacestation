@@ -1,42 +1,37 @@
-{lib, ...}: {
-  services.adguardhome = {
+{
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.services.adguardhome;
+in {
     enable = true;
     openFirewall = true;
     port = 8753;
     settings = {
       filters =
-        lib.mapAttrsToList (n: v: {
+        imap (id: url: {
           enabled = true;
-          id = n;
-          name = n;
-          url = v;
-        }) {
-          "Hagezi's Multi PRO" = "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/pro.txt";
-
-          "Hagezi's Badware Hoster" = "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/hoster.txt";
-
-          "Hagezi's DNS Bypass blocking" = "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/doh-vpn-proxy-bypass.txt";
-
-          "Hagezi's Dynamic DNS blocking" = "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/dyndns.txt";
-
-          "Hagezi's Gambling" = "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/gambling.txt";
-
-          "Hagezi's Native - LG webOS" = "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/native.lgwebos.txt";
-
-          "Hagezi's Native - Tiktok (Agressive)" = "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/hosts/native.tiktok.extended.txt";
-
-          "Hagezi's Native - Microsoft/Windows" = "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/native.winoffice.txt";
-
-          "Hagezi's Pop-up Ads" = "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/popupads.txt";
-
-          "Hagezi's TIF" = "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/tif.txt";
-        };
+          inherit id url;
+        }) [
+          "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/pro.txt"
+          "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/hoster.txt"
+          "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/doh-vpn-proxy-bypass.txt"
+          "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/dyndns.txt"
+          "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/gambling.txt"
+          "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/native.lgwebos.txt"
+          "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/hosts/native.tiktok.extended.txt"
+          "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/native.winoffice.txt"
+          "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/popupads.txt"
+          "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/tif.txt"
+        ];
       user_rules = [
-        "@@||tumblr.com^$important"
-        "@@||wordpress.com^$important"
+        "@@||neocities.org^$important"
         "@@||tailscale.com^$important"
         "@@||torproject.org^$important"
-        "@@||neocities.org^$important"
+        "@@||tumblr.com^$important"
+        "@@||wordpress.com^$important"
       ];
     };
   };
