@@ -18,6 +18,14 @@ in {
         }
       ];
       theme = "dark";
+      dns = {
+        bind_hosts = [
+          "127.0.0.1"
+          (elemAt config.networking.interfaces."eno1".ipv4.addresses 0).address
+          "100.86.139.22"
+        ];
+        upstram_dns = ["9.9.9.9"];
+      };
       filtering = {
         rewrites = mapAttrsToList (domain: answer: {inherit domain answer;}) {
           "abaduh.local" = "100.86.139.22";
