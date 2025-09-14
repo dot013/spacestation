@@ -10,6 +10,13 @@ in {
     openFirewall = true;
     port = 8753;
     settings = {
+      http = {address = "127.0.0.1:${toString port}";};
+      filtering = {
+        rewrites = mapAttrsToList (domain: answer: {inherit domain answer;}) {
+          "abaduh.local" = "100.86.139.22";
+          "*.abaduh.local" = "100.86.139.22";
+        };
+      };
       filters =
         imap (id: url: {
           enabled = true;
@@ -34,6 +41,13 @@ in {
         "@@||wordpress.com^$important"
       ];
     };
+  };
+
+  services.caddy.virtualHosts."adguard.abaduh.local" = {
+    extraConfig = ''
+      reverse_proxy http://localhost:${toString cfg.port}
+      tls internal
+    '';
   };
 
   # Ports needed to access the DNS resolver
