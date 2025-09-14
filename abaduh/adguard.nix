@@ -6,6 +6,7 @@
 with lib; let
   cfg = config.services.adguardhome;
 in {
+  services.adguardhome = rec {
     enable = true;
     openFirewall = true;
     port = 8753;
@@ -30,6 +31,28 @@ in {
         rewrites = mapAttrsToList (domain: answer: {inherit domain answer;}) {
           "abaduh.local" = "100.86.139.22";
           "*.abaduh.local" = "100.86.139.22";
+        };
+        parental_enabled = false;
+        safe_search.enabled = false;
+        safebrowsing_enabled = false;
+        blocked_services = {
+          ids = ["youtube"];
+          schedule =
+            (mapAttrs (n: v: {
+                start = elemAt v 0;
+                end = elemAt v 1;
+              }) rec {
+                sat = ["0s" "24h"];
+                sun = sat;
+                mon = ["18h" "24h"];
+                tue = mon;
+                wed = mon;
+                thu = mon;
+                fri = mon;
+              })
+            // {
+              time_zone = config.time.timeZone;
+            };
         };
       };
       filters =
