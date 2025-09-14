@@ -1,14 +1,14 @@
 {
   config,
   lib,
-  pkgs-unstable,
+  pkgs,
   ...
 }: let
   cfg = config.services.forgejo;
 in {
   services.forgejo = {
     enable = true;
-    package = pkgs-unstable.forgejo;
+    package = pkgs.forgejo;
     settings = let
       initList = l: (lib.strings.concatStringsSep "," l);
     in {
