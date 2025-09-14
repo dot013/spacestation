@@ -11,6 +11,13 @@ in {
     port = 8753;
     settings = {
       http = {address = "127.0.0.1:${toString port}";};
+      users = [
+        {
+          name = "admin";
+          password = "$2a$12$ciAyKG13D2ViEsy6fACxGu.1qEwwrAfPVgaVQdYgmkmvODHYuVWPa";
+        }
+      ];
+      theme = "dark";
       filtering = {
         rewrites = mapAttrsToList (domain: answer: {inherit domain answer;}) {
           "abaduh.local" = "100.86.139.22";
