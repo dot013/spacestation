@@ -1,9 +1,11 @@
 {
-  inputs,
   config,
+  inputs,
+  lib,
   pkgs,
   ...
-}: {
+}:
+with lib; {
   imports = [
     ./capytal
     ./abaduh
@@ -29,6 +31,7 @@
     packages = with pkgs;
       [
         libinput
+        inputs.dot013-nix.packages.${pkgs.system}.neovim
       ]
       ++ (with inputs.dot013-nix.packages.${pkgs.system}.devkit; [
         git
@@ -37,6 +40,10 @@
         zellij
         zsh
       ]);
+  };
+
+  environment.sessionVariables = {
+    EDITOR = getExe inputs.dot013-nix.packages.${pkgs.system}.neovim;
   };
 
   # GnuPG
