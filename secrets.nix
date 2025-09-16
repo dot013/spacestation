@@ -60,6 +60,20 @@ with lib; {
       owner = config.services.keikos.web.user;
     };
 
+    "nextcloud/adminpass" = mkIf config.services.nextcloud.enable {
+      owner = "nextcloud";
+    };
+    "nextcloud/s3/secret" = mkIf config.services.nextcloud.enable {
+      owner = "nextcloud";
+    };
+    "nextcloud/s3/sseC" = mkIf config.services.nextcloud.enable {
+      owner = "nextcloud";
+    };
+
+    "pgadmin/password" = mkIf config.services.pgadmin.enable {
+      owner = config.systemd.services.pgadmin.serviceConfig.User;
+    };
+
     "medama/anubis/hexFile" = {
       owner = config.services.anubis.instances."medama".user;
     };
