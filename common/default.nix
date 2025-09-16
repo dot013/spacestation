@@ -3,5 +3,6 @@
     ./caddy.nix
     ./cloudflare.nix
     ./garage.nix
+    ./postgresql.nix
   ];
 }
