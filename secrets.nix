@@ -36,6 +36,22 @@ with lib; {
       owner = config.services.anubis.instances."forgejo".user;
     };
 
+    "garage/admin_key" = mkIf config.services.garage.enable {
+      owner = config.systemd.services.garage.serviceConfig.User;
+    };
+    "garage/admin_secret" = mkIf config.services.garage.enable {
+      owner = config.systemd.services.garage.serviceConfig.User;
+    };
+    "garage/admin_token" = mkIf config.services.garage.enable {
+      owner = config.systemd.services.garage.serviceConfig.User;
+    };
+    "garage/metrics_token" = mkIf config.services.garage.enable {
+      owner = config.systemd.services.garage.serviceConfig.User;
+    };
+    "garage/rpc_secret" = mkIf config.services.garage.enable {
+      owner = config.systemd.services.garage.serviceConfig.User;
+    };
+
     "guz/password" = {
       owner = config.users.users."guz".name;
     };
