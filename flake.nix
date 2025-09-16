@@ -13,16 +13,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-index-database = {
-      url = "github:Mic92/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    base16 = {
-      url = "github:SenchoPens/base16.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     capytalcc = {
       url = "git+https://forge.capytal.company/capytal/capytal.cc";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -64,6 +54,5 @@
     nixosModules = {
       medama = ./modules/medama.nix;
     };
-    # homeConfigurations.worm = inputs.dot013-nix.homeConfigurations."x86_64-linux".worm;
   };
 }
