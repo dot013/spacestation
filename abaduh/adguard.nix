@@ -12,12 +12,9 @@ in {
     port = 8753;
     settings = {
       http = {address = "127.0.0.1:${toString port}";};
-      users = [
-        {
-          name = "admin";
-          password = "$2a$12$ciAyKG13D2ViEsy6fACxGu.1qEwwrAfPVgaVQdYgmkmvODHYuVWPa";
-        }
-      ];
+      users = mapAttrsToList (name: password: {inherit name password;}) {
+        "admin" = "$2a$12$ciAyKG13D2ViEsy6fACxGu.1qEwwrAfPVgaVQdYgmkmvODHYuVWPa";
+      };
       theme = "dark";
       dns = {
         bind_hosts = [
