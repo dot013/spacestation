@@ -28,10 +28,13 @@ in {
         upstram_dns = ["9.9.9.9"];
       };
       filtering = {
-        rewrites = mapAttrsToList (domain: answer: {inherit domain answer;}) {
-          "abaduh.local" = "100.86.139.22";
-          "*.abaduh.local" = "100.86.139.22";
-        };
+        rewrites = mkIf config.services.caddy.enable (pipe config.services.caddy.virtualHosts [
+          (filterAttrs (n: v: hasSuffix ".local" n))
+          (mapAttrsToList (domain: _: {
+            domain = removePrefix "https://" (removePrefix "http://" domain);
+            answer = "100.86.139.22";
+          }))
+        ]);
         parental_enabled = false;
         safe_search.enabled = false;
         safebrowsing_enabled = false;
@@ -81,7 +84,7 @@ in {
     };
   };
 
-  services.caddy.virtualHosts."adguard.abaduh.local" = {
+  services.caddy.virtualHosts."adguard.local" = {
     extraConfig = ''
       reverse_proxy http://localhost:${toString cfg.port}
       tls internal
