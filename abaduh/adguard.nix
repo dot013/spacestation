@@ -72,6 +72,7 @@ in {
           "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/tif.txt"
         ];
       user_rules = [
+        "@@||bearblog.dev^$important"
         "@@||neocities.org^$important"
         "@@||tailscale.com^$important"
         "@@||torproject.org^$important"
