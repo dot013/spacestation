@@ -26,6 +26,8 @@ in {
         calendar
         contacts
         memories
+        news
+        notes
         # recognize
         ;
     };
